@@ -8,5 +8,12 @@ module Corzinus
       g.assets false
       g.helper false
     end
+
+    config.to_prepare do
+      %w(decorator validator).each do |type|
+        paths = [Dir.pwd, "app/#{type.pluralize}/*_#{type}*.rb"]
+        Dir.glob(File.join(paths)).each { |file| require file }
+      end
+    end
   end
 end

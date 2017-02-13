@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'cancancan'
   s.add_dependency 'draper'
   s.add_dependency 'credit_card_validations'
+  s.add_dependency 'rails-i18n'
 
   s.add_development_dependency "pg"
   s.add_development_dependency 'rspec-rails'
