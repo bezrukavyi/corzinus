@@ -1,0 +1,12 @@
+class CreateCorzinusCreditCards < ActiveRecord::Migration[5.0]
+  def change
+    create_table :corzinus_credit_cards do |t|
+      t.string :number
+      t.string :name
+      t.string :cvv
+      t.string :month_year
+
+      t.timestamps
+    end
+  end
+end
