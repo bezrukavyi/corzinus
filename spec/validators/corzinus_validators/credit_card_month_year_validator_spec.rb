@@ -1,5 +1,7 @@
 module CorzinusValidators
   describe CreditCardMonthYearValidator, type: :validator do
+    extend WithModel
+
     with_model :MockCard do
       table do |t|
         t.string :month_year

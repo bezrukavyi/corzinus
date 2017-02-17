@@ -1,6 +1,6 @@
 module Corzinus
   RSpec.describe OrderItem, type: :model do
-    subject { build :corzinus_order_item }
+    subject { build :corzinus_order_item, :book_item }
 
     context 'association' do
       it { should belong_to :productable }
@@ -18,18 +18,6 @@ module Corzinus
       end
 
       describe '#stock_validate' do
-        with_model :MockProduct do
-          table do |t|
-            t.string :title
-            t.decimal :price
-            t.integer :count
-          end
-        end
-
-        before do
-          subject.productable = MockProduct.create(title: 'Rspec', price: 100.0,
-                                                   count: 100)
-        end
         it 'invalid' do
           subject.productable.count = 5
           subject.quantity = 6

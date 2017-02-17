@@ -1,5 +1,7 @@
 module CorzinusValidators
   describe AddressValidator, type: :validator do
+    extend WithModel
+
     with_model :MockAddress do
       table do |t|
         t.string :name

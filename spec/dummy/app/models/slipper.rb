@@ -1,0 +1,2 @@
+class Slipper < ApplicationRecord
+end
