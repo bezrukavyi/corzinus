@@ -1,6 +1,6 @@
 module Corzinus
   RSpec.describe OrderItem, type: :model do
-    subject { build :corzinus_order_item, :book_item }
+    subject { build :corzinus_order_item, :with_product }
 
     context 'association' do
       it { should belong_to :productable }

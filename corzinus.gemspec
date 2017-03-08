@@ -18,11 +18,11 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '~> 5.0.1'
+  s.add_dependency 'drape'
   s.add_dependency 'aasm'
   s.add_dependency 'wicked'
   s.add_dependency 'rectify'
   s.add_dependency 'cancancan'
-  s.add_dependency 'draper'
   s.add_dependency 'credit_card_validations'
   s.add_dependency 'rails-i18n'
 
@@ -36,7 +36,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'with_model'
-  s.add_development_dependency 'shoulda'
   s.add_development_dependency 'shoulda-matchers'
   s.add_development_dependency 'overcommit'
   s.add_development_dependency 'rubocop'

@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217180619) do
+ActiveRecord::Schema.define(version: 20170308150709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "books", force: :cascade do |t|
-    t.string   "title"
-    t.decimal  "price",      precision: 10, scale: 2
-    t.integer  "count"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
 
   create_table "corzinus_addresses", force: :cascade do |t|
     t.string   "first_name"
@@ -100,6 +92,21 @@ ActiveRecord::Schema.define(version: 20170217180619) do
     t.integer  "person_id"
     t.index ["credit_card_id"], name: "index_corzinus_orders_on_credit_card_id", using: :btree
     t.index ["delivery_id"], name: "index_corzinus_orders_on_delivery_id", using: :btree
+  end
+
+  create_table "typical_products", force: :cascade do |t|
+    t.string   "title"
+    t.decimal  "price",      precision: 10, scale: 2
+    t.integer  "count"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  create_table "typical_users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

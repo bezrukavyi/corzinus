@@ -6,10 +6,8 @@ if Rails.env.production?
 end
 require 'spec_helper'
 require 'rspec/rails'
-require 'shoulda-matchers'
-require 'aasm/rspec'
-require 'with_model'
 require 'rectify/rspec'
+require 'with_model'
 
 ENGINE_ROOT = File.join(File.dirname(__FILE__), '../')
 %w(support factories).each do |folder|
@@ -21,12 +19,14 @@ end
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include Shoulda::Matchers::ActiveModel
+  config.include Shoulda::Matchers::ActiveRecord
   config.include FactoryGirl::Syntax::Methods
+  config.include Rectify::RSpec::Helpers
   config.include I18n
+  config.extend WithModel
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
-  Capybara.javascript_driver = :poltergeist
 
   config.use_transactional_fixtures = false
   config.before(:each) do
@@ -52,11 +52,11 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
-end
 
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
   end
 end

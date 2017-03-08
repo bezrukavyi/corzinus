@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 module Corzinus
   RSpec.describe Coupon, type: :model do
     subject { build :corzinus_coupon }
@@ -10,7 +8,7 @@ module Corzinus
 
     context 'validation' do
       it { should validate_presence_of(:code) }
-      it { should validate_uniqueness_of(:code) }
+      it { should validate_uniqueness_of(:code).case_insensitive }
       it { should validate_length_of(:code).is_at_most(100) }
 
       it { should validate_presence_of(:discount) }

@@ -3,12 +3,21 @@ module Corzinus
     belongs_to :order, class_name: 'Corzinus::Order'
     belongs_to :productable, polymorphic: true
 
-    validate :stock_validate
     validates :quantity, presence: true,
                          numericality: { greater_than_or_equal_to: 0,
                                          less_than_or_equal_to: 99 }
 
+    validate :stock_validate
+
+    def sub_total
+      @sub_total ||= quantity * productable.price
+    end
+
     private
+
+    def destroy_if_empty
+      destroy if persisted? && quantity.zero?
+    end
 
     def stock_validate
       return if errors.present? || quantity <= productable.count
