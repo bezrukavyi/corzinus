@@ -3,6 +3,8 @@ module Corzinus
     belongs_to :order, class_name: 'Corzinus::Order'
     belongs_to :productable, polymorphic: true
 
+    before_validation :destroy_if_empty
+
     validates :quantity, presence: true,
                          numericality: { greater_than_or_equal_to: 0,
                                          less_than_or_equal_to: 99 }

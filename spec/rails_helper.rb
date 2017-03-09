@@ -8,6 +8,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'rectify/rspec'
 require 'with_model'
+require 'aasm/rspec'
 
 ENGINE_ROOT = File.join(File.dirname(__FILE__), '../')
 %w(support factories).each do |folder|

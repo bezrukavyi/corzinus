@@ -14,6 +14,8 @@ module Corzinus
     accepts_nested_attributes_for :order_items, allow_destroy: true
     accepts_nested_attributes_for :credit_card
 
+    before_save :update_total_price
+
     aasm column: :state, whiny_transitions: false do
       state :processing, initial: true
       state :in_progress
@@ -42,6 +44,18 @@ module Corzinus
       aasm.states.map(&:name)
     end
 
+    def self.not_empty
+      joins(:order_items)
+        .group('corzinus_orders.id')
+        .having('COUNT(corzinus_order_items) != 0')
+    end
+
+    def access_deliveries
+      address = send(Address::DELIVERY)
+      return unless address
+      @access_deliveries ||= Delivery.where(country: address.country)
+    end
+
     def add_item(productable, quantity = 1)
       return if quantity.zero?
       item = order_items.find_by(productable: productable)
@@ -50,6 +64,16 @@ module Corzinus
       else
         order_items.new(quantity: quantity, productable: productable)
       end
+    end
+
+    def merge_order!(order)
+      return self if self == order
+      order.order_items.each do |order_item|
+        add_item(order_item.productable, order_item.quantity).save
+      end
+      self.coupon = nil if order.coupon.present?
+      order.destroy && order.coupon&.update_attributes(order: self)
+      tap(&:save)
     end
 
     def items_count
@@ -70,6 +94,13 @@ module Corzinus
 
     def calc_total_cost(*additions)
       sub_total + additions.map { |addition| send("#{addition}_cost") }.sum
+    end
+
+    private
+
+    def update_total_price
+      self.coupon = nil if items_count.zero?
+      self.total_price = calc_total_cost(:coupon, :delivery)
     end
   end
 end
