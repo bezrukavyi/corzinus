@@ -1,5 +1,9 @@
 class TypicalUser < ApplicationRecord
-  include Corzinus::AddressableRelation
+  include Corzinus::Relatable::Address
+  include Corzinus::Relatable::Order
 
-  Corzinus::Address::TYPES.each { |type| has_address type }
+  has_addresses
+  has_orders
+
+
 end

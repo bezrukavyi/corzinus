@@ -1,10 +1,10 @@
 module Corzinus
   class AddOrderItem < Rectify::Command
-    attr_reader :order, :productable, :quantity
+    attr_reader :order, :params, :quantity
 
     def initialize(order, params)
       @order = order
-      @productable = params[:productable]
+      @params = params
       @quantity = params[:quantity].to_i
     end
 
@@ -17,6 +17,11 @@ module Corzinus
     end
 
     private
+
+    def productable
+      product_class = params[:productable_type].classify.constantize
+      @productable = product_class.find_by(id: params[:productable_id])
+    end
 
     def order_item
       @order_item ||= order.add_item(productable, quantity)

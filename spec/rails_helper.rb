@@ -30,25 +30,6 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = false
-  config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
-  end
-
-  config.before(:each, type: :feature) do
-    driver_test = Capybara.current_driver == :rack_test
-    driver_shares_db_connection_with_specs = driver_test
-    unless driver_shares_db_connection_with_specs
-      DatabaseCleaner.strategy = :truncation
-    end
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.append_after(:each) do
-    DatabaseCleaner.clean
-  end
 
   config.infer_spec_type_from_file_location!
 

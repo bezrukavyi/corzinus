@@ -1,20 +1,22 @@
 module Corzinus
   class Order < ApplicationRecord
-    include Corzinus::AddressableRelation
+    include Corzinus::Relatable::Address
     include AASM
 
+    has_addresses
     belongs_to :person, optional: true, class_name: Corzinus.person_class.to_s
     belongs_to :delivery, optional: true, class_name: 'Corzinus::Delivery'
     belongs_to :credit_card, optional: true, class_name: 'Corzinus::CreditCard'
     has_one :coupon, dependent: :nullify, class_name: 'Corzinus::Coupon'
     has_many :order_items, dependent: :destroy, class_name: 'Corzinus::OrderItem'
 
-    Corzinus::Address::TYPES.each { |type| has_address type }
-
     accepts_nested_attributes_for :order_items, allow_destroy: true
     accepts_nested_attributes_for :credit_card
 
     before_save :update_total_price
+
+    scope :with_products, -> { includes(order_items: :productable) }
+    scope :with_persons, -> { where.not(person_id: nil) }
 
     aasm column: :state, whiny_transitions: false do
       state :processing, initial: true

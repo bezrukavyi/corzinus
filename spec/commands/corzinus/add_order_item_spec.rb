@@ -2,8 +2,13 @@ module Corzinus
   describe AddOrderItem do
     let(:order) { create :corzinus_order, :with_products }
     let(:item) { order.order_items.first }
-    let(:productable) { item.productable }
-    let(:params) { { productable: productable, quantity: 20 } }
+    let(:params) do
+      {
+        productable_id: item.productable_id,
+        productable_type: item.productable_type,
+        quantity: 20
+      }
+    end
 
     context '#call' do
       subject { AddOrderItem.new(order, params) }
@@ -17,7 +22,11 @@ module Corzinus
       end
 
       it 'invalid' do
-        invalid_params = { productable: productable, quantity: 1000 }
+        invalid_params = {
+          productable_id: item.productable_id,
+          productable_type: item.productable_type,
+          quantity: 1000
+        }
         subject = AddOrderItem.new(order, invalid_params)
         expect { subject.call }.to broadcast(:invalid)
       end

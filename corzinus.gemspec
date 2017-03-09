@@ -41,5 +41,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'overcommit'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'brakeman'
+  s.add_development_dependency 'rails-controller-testing'
   s.add_development_dependency 'letter_opener_web'
 end

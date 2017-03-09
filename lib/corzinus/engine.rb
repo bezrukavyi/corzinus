@@ -15,5 +15,8 @@ module Corzinus
         Dir.glob(File.join(paths)).each { |file| require file }
       end
     end
+
+    config.i18n.default_locale = :en
+    config.i18n.load_path += Dir[Engine.root.join('config', 'locales', '**', '*.{rb,yml}')]
   end
 end
