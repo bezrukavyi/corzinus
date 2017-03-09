@@ -55,5 +55,21 @@ module Corzinus
     def items_count
       order_items.map(&:quantity).sum
     end
+
+    def sub_total
+      order_items.map(&:sub_total).sum
+    end
+
+    def coupon_cost
+      coupon ? coupon.calc_discount(sub_total) : 0.00
+    end
+
+    def delivery_cost
+      delivery ? delivery.price : 0.00
+    end
+
+    def calc_total_cost(*additions)
+      sub_total + additions.map { |addition| send("#{addition}_cost") }.sum
+    end
   end
 end

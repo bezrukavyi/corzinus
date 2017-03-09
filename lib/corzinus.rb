@@ -3,6 +3,8 @@ require 'rectify'
 require 'drape'
 require 'credit_card_validations'
 require 'aasm'
+require 'haml'
+require 'rails-i18n'
 
 module Corzinus
   mattr_accessor :person_class

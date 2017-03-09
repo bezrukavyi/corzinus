@@ -10,5 +10,9 @@ module Corzinus
     def active?
       order.blank?
     end
+
+    def calc_discount(price)
+      price * discount * -0.01
+    end
   end
 end

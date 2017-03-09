@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'cancancan'
   s.add_dependency 'credit_card_validations'
   s.add_dependency 'rails-i18n'
+  s.add_dependency 'haml'
 
   s.add_development_dependency "pg"
   s.add_development_dependency 'rspec-rails'
@@ -40,4 +41,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'overcommit'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'brakeman'
+  s.add_development_dependency 'letter_opener_web'
 end
