@@ -6,7 +6,7 @@ module CorzinusValidators
       INSPECTIONS.each do |inspection|
         next if send(inspection, value)
         object.errors.add(attribute,
-                          I18n.t("validators.credit_card.#{inspection}"))
+                          I18n.t("corzinus.validators.credit_card.#{inspection}"))
       end
     end
 

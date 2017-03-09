@@ -1,0 +1,14 @@
+%tr
+  %td
+    %h3.title= order_item.productable.title
+  %td
+    %span.font-16.in-gold-500= currency_price(order_item.productable.price)
+  %td
+    = render 'corzinus/order_items/quantity_field', order_item: order_item,
+      field: local_assigns[:field]
+  %td
+    %span.font-16.in-gold-500= currency_price(order_item.sub_total)
+
+  - if local_assigns[:field]
+    %td
+      = render 'corzinus/order_items/delete_link', order_item: order_item

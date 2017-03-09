@@ -21,7 +21,7 @@ module Corzinus
           subject.quantity = 6
           subject.valid?
           expect(subject.errors.full_messages).to include('Quantity ' +
-            I18n.t('validators.order_item.stock'))
+            I18n.t('corzinus.validators.order_item.stock'))
         end
         it 'valid' do
           subject.productable.count = 5

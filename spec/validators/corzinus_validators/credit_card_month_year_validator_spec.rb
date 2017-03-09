@@ -25,7 +25,7 @@ module CorzinusValidators
           credit_card.validate(:month_year)
           expect(credit_card.errors.full_messages)
             .to include('Month year ' +
-              I18n.t('validators.credit_card.slash_format'))
+              I18n.t('corzinus.validators.credit_card.slash_format'))
         end
         it 'when invalid format' do
           credit_card.month_year = '12\17'
@@ -46,7 +46,7 @@ module CorzinusValidators
           credit_card.validate(:month_year)
           expect(credit_card.errors.full_messages)
             .to include('Month year ' +
-              I18n.t('validators.credit_card.month_format'))
+              I18n.t('corzinus.validators.credit_card.month_format'))
         end
         it 'when invalid format' do
           credit_card.month_year = '102/17'
@@ -67,7 +67,7 @@ module CorzinusValidators
           credit_card.validate(:month_year)
           expect(credit_card.errors.full_messages)
             .to include('Month year ' +
-              I18n.t('validators.credit_card.year_format'))
+              I18n.t('corzinus.validators.credit_card.year_format'))
         end
         it 'when invalid format' do
           credit_card.month_year = '12/1721'

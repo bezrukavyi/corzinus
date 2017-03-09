@@ -37,7 +37,7 @@ module CorzinusValidators
         after do
           address.validate(:name)
           expect(address.errors.full_messages).to include('Name ' +
-            I18n.t('validators.address.name'))
+            I18n.t('corzinus.validators.address.name'))
         end
         it 'when empty' do
           address.name = nil
@@ -58,7 +58,7 @@ module CorzinusValidators
         after do
           address.validate(:zip)
           expect(address.errors.full_messages).to include('Zip ' +
-            I18n.t('validators.address.zip'))
+            I18n.t('corzinus.validators.address.zip'))
         end
         it 'when empty' do
           address.zip = nil

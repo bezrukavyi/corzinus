@@ -13,7 +13,7 @@ module Corzinus
     def access_max_days
       return unless errors.blank?
       return if min_days < max_days
-      errors.add(:min_days, I18n.t('validators.delivery.access_max_days'))
+      errors.add(:min_days, I18n.t('corzinus.validators.delivery.access_max_days'))
     end
   end
 end

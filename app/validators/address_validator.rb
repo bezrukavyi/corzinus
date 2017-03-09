@@ -3,7 +3,7 @@ module CorzinusValidators
     def validate_each(object, attribute, value)
       options.keys.each do |inspection|
         next if value =~ send(inspection)
-        object.errors.add(attribute, I18n.t("validators.address.#{inspection}"))
+        object.errors.add(attribute, I18n.t("corzinus.validators.address.#{inspection}"))
       end
     end
 

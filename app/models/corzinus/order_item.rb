@@ -23,7 +23,7 @@ module Corzinus
 
     def stock_validate
       return if errors.present? || quantity <= productable.count
-      errors.add(:quantity, I18n.t('validators.order_item.stock'))
+      errors.add(:quantity, I18n.t('corzinus.validators.order_item.stock'))
     end
   end
 end

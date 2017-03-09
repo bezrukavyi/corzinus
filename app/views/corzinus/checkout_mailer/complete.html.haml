@@ -23,10 +23,10 @@
 
   %table
     %tr
-      %th= t('carts.edit.product')
-      %th= t('carts.edit.price')
-      %th= t('carts.edit.quantity')
-      %th= t('carts.edit.sub_total')
+      %th= t('corzinus.carts.product')
+      %th= t('corzinus.carts.price')
+      %th= t('corzinus.carts.quantity')
+      %th= t('corzinus.carts.sub_total')
     - @order.order_items.each do |order_item|
       %tr
         %td= order_item.productable.title
@@ -40,16 +40,16 @@
       %td Checkout
       %td
     %tr
-      %td= "#{t('carts.edit.sub_total')}:"
+      %td= "#{t('corzinus.carts.sub_total')}:"
       %td= currency_price(@order.sub_total)
     %tr
       %td= @order.decorate.discount_title
       %td= currency_price(@order.coupon_cost)
     %tr
-      %td= "#{t('carts.edit.delivery')}:"
+      %td= "#{t('corzinus.carts.delivery')}:"
       %td= currency_price(@order.delivery_cost)
     %tr
       %td
-        %b= "#{t('carts.edit.order_total')}:"
+        %b= "#{t('corzinus.carts.order_total')}:"
       %td
         %b= currency_price(@order.calc_total_cost(:coupon, :delivery))

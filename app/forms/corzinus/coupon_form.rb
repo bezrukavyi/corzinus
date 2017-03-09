@@ -17,17 +17,17 @@ module Corzinus
 
     def exist_coupon
       return if code.blank? || !current_coupon.blank?
-      errors.add(:code, I18n.t('validators.coupon.not_found'))
+      errors.add(:code, I18n.t('corzinus.validators.coupon.not_found'))
     end
 
     def activated_coupon
       return if code.blank? || !errors.blank? || current_coupon.try(:active?)
-      errors.add(:code, I18n.t('validators.coupon.used'))
+      errors.add(:code, I18n.t('corzinus.validators.coupon.used'))
     end
 
     def check_order(order)
       return if code.blank? || order.coupon.blank?
-      errors.add(:code, I18n.t('validators.coupon.check_order'))
+      errors.add(:code, I18n.t('corzinus.validators.coupon.check_order'))
     end
 
     def current_coupon

@@ -44,7 +44,7 @@ module Corzinus
           delivery = build :corzinus_delivery, min_days: 10, max_days: 5
           delivery.valid?
           expect(delivery.errors.full_messages).to include('Min days ' +
-            I18n.t('validators.delivery.access_max_days'))
+            I18n.t('corzinus.validators.delivery.access_max_days'))
         end
       end
     end

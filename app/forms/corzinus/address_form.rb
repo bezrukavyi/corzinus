@@ -37,7 +37,7 @@ module Corzinus
     def wrong_code
       country = Corzinus::Country.find_by_id(country_id)
       return if country.blank? || phone =~ /\A\+#{country.code}/
-      errors.add(:phone, I18n.t('validators.address.country_code',
+      errors.add(:phone, I18n.t('corzinus.validators.address.country_code',
                                 code: "+#{country.code}"))
     end
   end

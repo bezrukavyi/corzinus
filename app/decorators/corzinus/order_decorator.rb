@@ -3,7 +3,7 @@ module Corzinus
     delegate_all
 
     def discount_title
-      title = I18n.t('carts.edit.coupon')
+      title = I18n.t('corzinus.carts.coupon')
       coupon ? "#{title} (#{coupon.discount}%):" : "#{title}:"
     end
 

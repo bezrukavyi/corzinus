@@ -6,6 +6,9 @@ require 'aasm'
 require 'haml'
 require 'rails-i18n'
 require 'wicked'
+require 'bootstrap-sass'
+require 'simple_form'
+require 'jquery-rails'
 
 module Corzinus
   mattr_accessor :person_class

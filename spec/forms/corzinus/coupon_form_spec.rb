@@ -16,7 +16,7 @@ module Corzinus
       subject.code = 'Test'
       subject.valid?
       expect(subject.errors.full_messages).to include('Code ' +
-        I18n.t('validators.coupon.not_found'))
+        I18n.t('corzinus.validators.coupon.not_found'))
     end
 
     it '#activated_coupon' do
@@ -24,7 +24,7 @@ module Corzinus
       coupon_form = CouponForm.from_model used_coupon
       coupon_form.valid?
       expect(coupon_form.errors.full_messages).to include('Code ' +
-        I18n.t('validators.coupon.used'))
+        I18n.t('corzinus.validators.coupon.used'))
     end
 
     it '#valid? with order' do
@@ -32,7 +32,7 @@ module Corzinus
       order.coupon = create :corzinus_coupon
       subject.valid?(order)
       expect(subject.errors.full_messages).to include('Code ' +
-        I18n.t('validators.coupon.check_order'))
+        I18n.t('corzinus.validators.coupon.check_order'))
     end
   end
 end

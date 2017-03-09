@@ -12,7 +12,8 @@ module Corzinus
     end
 
     def current_person
-      send("current_#{Corzinus.person_class.underscore}")
+      resource_method = "current_#{Corzinus.person_class.underscore}"
+      send(resource_method) if respond_to?(resource_method)
     end
 
     def current_order

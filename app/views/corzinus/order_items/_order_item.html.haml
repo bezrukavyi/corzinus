@@ -1,0 +1,26 @@
+.general-cart-item.divider-lg-bottom.mb-30
+
+  - if local_assigns[:field]
+    = render 'corzinus/order_items/delete_link', order_item: order_item
+
+  .general-img-wrap-table
+    %h3= order_item.productable.title
+
+  %table.table
+    %tr
+      %td
+        %span.in-grey-600= t('corzinus.carts.price')
+      %td
+        %span.font-16.in-gold-500= currency_price(order_item.productable.price)
+    %tr
+      %td.vertical-middle
+        %span.in-grey-600= t('corzinus.carts.quantity')
+      %td
+        .input-group.align-center
+          = render 'corzinus/order_items/quantity_field', order_item: order_item,
+            field: local_assigns[:field]
+    %tr
+      %td
+        %span.in-grey-600= t('corzinus.carts.sub_total')
+      %td
+        %span.font-16.in-gold-500= currency_price(order_item.sub_total)

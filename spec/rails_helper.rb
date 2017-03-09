@@ -9,6 +9,11 @@ require 'rspec/rails'
 require 'rectify/rspec'
 require 'with_model'
 require 'aasm/rspec'
+require 'capybara/rspec'
+require 'capybara/email/rspec'
+require 'capybara-screenshot/rspec'
+require 'capybara/poltergeist'
+
 
 ENGINE_ROOT = File.join(File.dirname(__FILE__), '../')
 %w(support factories).each do |folder|
@@ -28,6 +33,8 @@ RSpec.configure do |config|
   config.extend WithModel
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  Capybara.javascript_driver = :poltergeist
 
   config.use_transactional_fixtures = false
 
