@@ -1,6 +1,6 @@
 module Corzinus
   class AddressForm < Rectify::Form
-    include CorzinusValidators
+    include Corzinus::BaseValidators
 
     STRING_ATTRS = [:first_name, :last_name, :name, :zip, :phone, :city].freeze
     INTEGER_ATTRS = [:country_id, :address_type].freeze

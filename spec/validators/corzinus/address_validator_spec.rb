@@ -1,5 +1,5 @@
-module CorzinusValidators
-  describe AddressValidator, type: :validator do
+module Corzinus
+  describe BaseValidators::AddressValidator, type: :validator do
     extend WithModel
 
     with_model :MockAddress do
@@ -8,7 +8,7 @@ module CorzinusValidators
         t.string :zip
       end
       model do
-        include CorzinusValidators
+        include Corzinus::BaseValidators
 
         validates :name, address: { name: true }
         validates :zip, address: { zip: true }

@@ -11,8 +11,8 @@ module Corzinus
 
     config.to_prepare do
       %w(decorator validator).each do |type|
-        paths = [Dir.pwd, "app/#{type.pluralize}/*_#{type}*.rb"]
-        Dir.glob(File.join(paths)).each { |file| require file }
+        paths = Dir[Engine.root.join('app', type.pluralize.to_s, '**', "*_#{type}.rb")]
+        paths.each { |file| require file }
       end
     end
 

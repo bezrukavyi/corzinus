@@ -17,7 +17,7 @@ module Corzinus
                       alert: t('corzinus.flash.failure.step')
         end
         on(:empty_cart) do
-          redirect_to books_path, alert: t('corzinus.flash.failure.empty_cart')
+          redirect_to edit_cart_path, alert: t('corzinus.flash.failure.empty_cart')
         end
       end
     end

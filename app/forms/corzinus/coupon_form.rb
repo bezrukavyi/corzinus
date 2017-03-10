@@ -1,6 +1,5 @@
 module Corzinus
   class CouponForm < Rectify::Form
-    include CorzinusValidators
 
     attribute :code, String
 

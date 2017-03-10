@@ -1,5 +1,5 @@
-module CorzinusValidators
-  describe CreditCardMonthYearValidator, type: :validator do
+module Corzinus
+  describe BaseValidators::CreditCardMonthYearValidator, type: :validator do
     extend WithModel
 
     with_model :MockCard do
@@ -7,7 +7,7 @@ module CorzinusValidators
         t.string :month_year
       end
       model do
-        include CorzinusValidators
+        include Corzinus::BaseValidators
 
         validates :month_year, credit_card_month_year: true
       end

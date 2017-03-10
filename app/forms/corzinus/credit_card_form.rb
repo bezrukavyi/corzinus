@@ -1,6 +1,6 @@
 module Corzinus
   class CreditCardForm < Rectify::Form
-    include CorzinusValidators
+    include Corzinus::BaseValidators
 
     STRING_ATTRS = [:name, :number, :cvv, :month_year].freeze
 
