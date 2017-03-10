@@ -27,10 +27,14 @@ ru:
       address:
         use_base_address: Использовать адрес оплаты
       delivery:
+        from: от
+        to: до
+        days: Дней
         title: Доставка
       payment:
         title: Кредитная карта
       confirm:
+        edit: изменить
         place_order: Разместить заказ
         shipments: Информация о доставке
         payment: Информация об оплате

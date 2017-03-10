@@ -14,7 +14,6 @@ require 'capybara/email/rspec'
 require 'capybara-screenshot/rspec'
 require 'capybara/poltergeist'
 
-
 ENGINE_ROOT = File.join(File.dirname(__FILE__), '../')
 %w(support factories).each do |folder|
   Dir[File.join(ENGINE_ROOT, "spec/#{folder}/**/*.rb")].each do |file|
@@ -34,7 +33,13 @@ RSpec.configure do |config|
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
+  Capybara.register_driver :selenium_chrome do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
+  end
+  Capybara::Webkit.configure(&:block_unknown_urls)
+
   Capybara.javascript_driver = :poltergeist
+  # Capybara.javascript_driver = :selenium_chrome
 
   config.use_transactional_fixtures = false
 
@@ -42,8 +47,8 @@ RSpec.configure do |config|
 
   config.filter_rails_from_backtrace!
 
-  Shoulda::Matchers.configure do |config|
-    config.integrate do |with|
+  Shoulda::Matchers.configure do |matcher_config|
+    matcher_config.integrate do |with|
       with.test_framework :rspec
       with.library :rails
     end

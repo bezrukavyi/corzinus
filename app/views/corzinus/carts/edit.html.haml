@@ -9,16 +9,10 @@
 
   - else
 
-    .visible-xs
+    .cart-container
       = simple_form_for current_order, url: corzinus.cart_path,
         html: { id: 'update_order' } do |field|
         = field.simple_fields_for :order_items do |item_field|
           = render 'corzinus/order_items/order_item', order_item: item_field.object,
             field: item_field
-        = render 'bottom_panel', field: field
-
-    .hidden-xs
-      = simple_form_for current_order, url: corzinus.cart_path,
-        html: { id: 'update_order_mobile' } do |field|
-        = render 'corzinus/order_items/table', field: field
         = render 'bottom_panel', field: field

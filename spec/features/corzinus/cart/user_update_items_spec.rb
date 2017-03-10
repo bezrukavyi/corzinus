@@ -12,26 +12,14 @@ module Corzinus
       visit corzinus.edit_cart_path
     end
 
-    context 'Success update quantity' do
-      scenario 'desktop form' do
-        fill_order('update_order', [3, 1])
-        expect(page).to have_content(I18n.t('corzinus.flash.success.cart_update'))
-      end
-      scenario 'mobile form' do
-        fill_order('update_order_mobile', 5)
-        expect(page).to have_content(I18n.t('corzinus.flash.success.cart_update'))
-      end
+    scenario 'Success update quantity' do
+      fill_order('update_order', [3, 1])
+      expect(page).to have_content(I18n.t('corzinus.flash.success.cart_update'))
     end
 
-    context 'Failure update quantity' do
-      scenario 'desktop form' do
-        fill_order('update_order', 1000)
-        expect(page).to have_content(I18n.t('corzinus.flash.failure.cart_update'))
-      end
-      scenario 'mobile form' do
-        fill_order('update_order_mobile', 1000)
-        expect(page).to have_content(I18n.t('corzinus.flash.failure.cart_update'))
-      end
+    scenario 'Failure update quantity' do
+      fill_order('update_order', 1000)
+      expect(page).to have_content(I18n.t('corzinus.flash.failure.cart_update'))
     end
 
     scenario 'Destroy item', js: true do

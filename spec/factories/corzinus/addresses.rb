@@ -26,4 +26,8 @@ FactoryGirl.define do
   factory :corzinus_address_order, parent: :corzinus_address do
     addressable { create :corzinus_order }
   end
+
+  factory :corzinus_address_person, parent: :corzinus_address do
+    addressable { create :typical_user }
+  end
 end

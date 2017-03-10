@@ -29,6 +29,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'simple_form'
   s.add_dependency 'bootstrap-sass'
   s.add_dependency 'jquery-rails'
+  s.add_dependency 'coffee-rails', '~> 4.2'
+  s.add_dependency 'turbolinks', '~> 5'
 
   s.add_development_dependency 'pg'
   s.add_development_dependency 'rspec-rails'
@@ -48,4 +50,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'brakeman'
   s.add_development_dependency 'rails-controller-testing'
   s.add_development_dependency 'letter_opener_web'
+  s.add_development_dependency 'selenium-webdriver'
+  s.add_development_dependency 'capybara-webkit'
 end

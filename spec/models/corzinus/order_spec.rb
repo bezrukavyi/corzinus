@@ -131,7 +131,7 @@ module Corzinus
       first_delivery = create :corzinus_delivery, country: country
       second_delivery = create :corzinus_delivery, country: country
       allow(subject).to receive(:shipping).and_return(shipping)
-      expect(subject.access_deliveries).to eq([first_delivery, second_delivery])
+      expect(subject.access_deliveries).to eq([second_delivery, first_delivery])
     end
 
     describe '#any_address?' do

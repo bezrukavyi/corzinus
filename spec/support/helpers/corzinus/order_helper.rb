@@ -52,12 +52,11 @@ module Corzinus
 
       def check_order_items(order)
         items = order.order_items
-        books = items.map(&:book).map(&:decorate)
+        products = items.map(&:productable)
         check_title(items, :quantity)
         check_price(items, :sub_total)
-        check_title(books)
-        check_title(books, :short_desc)
-        check_price(books)
+        check_title(products)
+        check_price(products)
       end
     end
   end

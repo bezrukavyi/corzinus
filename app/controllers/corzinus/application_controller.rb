@@ -5,6 +5,7 @@ module Corzinus
     protect_from_forgery with: :exception
 
     helper_method :current_order
+    helper_method :current_person
 
     def authenticate_person!
       auth_method = "authenticate_#{Corzinus.person_class.underscore}!"

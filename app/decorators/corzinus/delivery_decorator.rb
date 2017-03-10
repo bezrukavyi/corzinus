@@ -3,7 +3,10 @@ module Corzinus
     delegate_all
 
     def duration
-      [I18n.t('from'), min_days, I18n.t('to'), max_days, I18n.t('days')].join(' ')
+      to_text = I18n.t('corzinus.checkouts.delivery.from')
+      from_text = I18n.t('corzinus.checkouts.delivery.to')
+      days_text = I18n.t('corzinus.checkouts.delivery.days')
+      [to_text, min_days, from_text, max_days, days_text].join(' ')
     end
 
     def order_subtotal(order)

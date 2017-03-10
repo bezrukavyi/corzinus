@@ -1,0 +1,17 @@
+%main.container.general-main-wrap
+  = render 'step_nav'
+
+  = form_tag checkout_path, class: 'delivery_form', method: :patch do
+    .row.mb-20
+      = render 'corzinus/orders/components_panel', order: current_order, edit: true
+
+
+    .visible-xs
+      = render current_order.order_items
+
+    = render 'corzinus/orders/result_panel'
+
+    .col-md-12.mb-40
+      .center-block.general-text-align.center
+        = hidden_field_tag :confirm, true
+        = submit_tag t('.place_order'), class: 'button btn btn-default mb-20'

@@ -9,6 +9,8 @@ require 'wicked'
 require 'bootstrap-sass'
 require 'simple_form'
 require 'jquery-rails'
+require 'coffee-rails'
+require 'turbolinks'
 
 module Corzinus
   mattr_accessor :person_class
