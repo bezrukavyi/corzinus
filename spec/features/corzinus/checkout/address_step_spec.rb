@@ -1,5 +1,5 @@
-include Corzinus::Support::Address
 include Corzinus::Support::PersonsController
+include Corzinus::Support::Order
 
 module Corzinus
   feature 'Address step', type: :feature do
@@ -8,8 +8,7 @@ module Corzinus
     let(:shipping_attrs) { attributes_for :corzinus_address_person, :shipping }
 
     background do
-      allow_any_instance_of(CheckoutsController)
-        .to receive(:current_order).and_return(order)
+      stub_current_order(order)
       stub_current_person(Corzinus::ApplicationController, person, :instance)
       visit corzinus.checkout_path(id: :address)
     end

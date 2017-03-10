@@ -1,4 +1,5 @@
 include Corzinus::Support::Order
+
 module Corzinus
   feature 'User update coupon', type: :feature do
     let(:person) { create :typical_user }
@@ -6,8 +7,7 @@ module Corzinus
     let(:coupon) { create :corzinus_coupon }
 
     before do
-      allow_any_instance_of(CartsController)
-        .to receive(:current_order).and_return(order)
+      stub_current_order(order)
       visit corzinus.edit_cart_path
     end
 

@@ -7,8 +7,7 @@ module Corzinus
     let(:order) { create :corzinus_order, :full_package, person: person }
 
     background do
-      allow_any_instance_of(Corzinus::CheckoutsController)
-        .to receive(:current_order).and_return(order)
+      stub_current_order(order)
       stub_current_person(Corzinus::ApplicationController, person, :instance)
     end
 

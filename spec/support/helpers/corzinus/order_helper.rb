@@ -11,6 +11,10 @@ module Corzinus
       include CreditCard
       include Delivery
 
+      def stub_current_order(order)
+        allow_any_instance_of(Corzinus::ApplicationController).to receive(:set_current_order).and_return(order)
+      end
+
       def fill_order(form_id, values)
         values = [values] unless values.respond_to?(:each)
         within "##{form_id}" do

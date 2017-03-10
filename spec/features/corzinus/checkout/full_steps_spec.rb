@@ -1,5 +1,4 @@
 include Corzinus::Support::PersonsController
-include Corzinus::Support::CreditCard
 include Corzinus::Support::Order
 
 module Corzinus
@@ -12,8 +11,7 @@ module Corzinus
 
     background do
       @delivery = create :corzinus_delivery
-      allow_any_instance_of(Corzinus::CheckoutsController)
-        .to receive(:current_order).and_return(order)
+      stub_current_order(order)
       stub_current_person(Corzinus::ApplicationController, person, :instance)
     end
 

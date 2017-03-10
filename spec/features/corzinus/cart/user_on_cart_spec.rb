@@ -1,4 +1,5 @@
 include Corzinus::Support::CheckAttributes
+include Corzinus::Support::Order
 
 module Corzinus
   feature 'User on cart', type: :feature do
@@ -9,8 +10,7 @@ module Corzinus
     let(:products) { items.map(&:productable) }
 
     scenario 'When person have order items' do
-      allow_any_instance_of(Corzinus::CartsController)
-        .to receive(:current_order).and_return(full_order)
+      stub_current_order(full_order)
       visit corzinus.edit_cart_path
       expect(page).to have_content I18n.t('corzinus.carts.title')
       expect(page).to have_no_content I18n.t('corzinus.carts.empty_message')

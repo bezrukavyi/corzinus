@@ -1,6 +1,6 @@
 %label.radio-label
   = radio_button_tag :delivery_id, delivery.id, current_delivery?(delivery),
-    class: 'radio-input', hidden: true
+    class: 'radio-input'
   %span.radio-icon
   %span.radio-text= delivery.name
   %span.hidden.delivery-order-subtotal

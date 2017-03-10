@@ -1,8 +1,8 @@
-%h3.general-subtitle= t("corzinus.#{address.address_type}_address")
-%p.general-address
+%h3.corzinus-subtitle= t("corzinus.#{address.address_type}_address")
+%p.corzinus-address
   = address.decorate.full_name
   - if local_assigns[:edit]
-    %span.general-edit= link_to t('edit'), checkout_path(:address)
+    %span.corzinus-edit= link_to t('edit'), checkout_path(:address)
   %br
   = address.name
   %br

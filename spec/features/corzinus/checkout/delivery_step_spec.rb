@@ -1,4 +1,5 @@
 include Corzinus::Support::PersonsController
+include Corzinus::Support::Order
 
 module Corzinus
   feature 'Delivery step', type: :feature do
@@ -7,8 +8,7 @@ module Corzinus
 
     background do
       @delivery = create :corzinus_delivery, country: order.shipping.country
-      allow_any_instance_of(Corzinus::CheckoutsController)
-        .to receive(:current_order).and_return(order)
+      stub_current_order(order)
       stub_current_person(Corzinus::ApplicationController, person, :instance)
     end
 
@@ -26,7 +26,7 @@ module Corzinus
       expect(current_path).to eq(corzinus.checkout_path(id: :delivery))
     end
 
-    scenario 'When person choose delivery and continue checkout' do
+    scenario 'When person choose delivery and continue checkout', js: true do
       order.update_attribute(:delivery, nil)
       visit corzinus.checkout_path(id: :delivery)
       first('label', text: @delivery.name).click
