@@ -1,6 +1,6 @@
 module Corzinus
   describe UpdateAddress do
-    let(:addressable) { create :typical_user }
+    let(:addressable) { create :corzinus_order }
 
     context 'valid' do
       let(:params) { { address: attributes_for(:corzinus_address, :shipping) } }

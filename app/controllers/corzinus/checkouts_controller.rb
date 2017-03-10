@@ -41,8 +41,11 @@ module Corzinus
     end
 
     def address_components
-      object = current_order.any_address? ? current_order : current_person
-      addresses_by_model(object)
+      address_object = current_order
+      if current_person.respond_to?(:addresses) && !current_order.any_address?
+        address_object = current_person
+      end
+      addresses_by_model(address_object)
       set_countries
     end
 
