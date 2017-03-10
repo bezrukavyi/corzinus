@@ -18,4 +18,8 @@ module Corzinus
   def self.person_class
     @@person_class.try(:constantize) || 'TypicalUser'
   end
+
+  def self.setup
+    yield self
+  end
 end
