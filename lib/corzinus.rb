@@ -14,10 +14,10 @@ require 'turbolinks'
 
 module Corzinus
   mattr_accessor :person_class
+  @@person_class = 'TypicalUser'
 
-  def self.person_class
-    @@person_class.try(:constantize) || 'TypicalUser'
-  end
+  mattr_accessor :checkout_steps
+  @@checkout_steps = [:address, :delivery, :payment, :confirm, :complete]
 
   def self.setup
     yield self

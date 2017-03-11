@@ -4,9 +4,10 @@ module Corzinus
     include AddressableAttrubutes
     include Rectify::ControllerHelpers
 
-    steps :address, :delivery, :payment, :confirm, :complete
-
     before_action :authenticate_person!
+
+    before_action :set_steps
+    before_action :setup_wizard
     before_action :set_step_components
 
     def show
@@ -34,6 +35,10 @@ module Corzinus
     end
 
     private
+
+    def set_steps
+      self.steps = Corzinus.checkout_steps
+    end
 
     def set_step_components
       @steps = steps
