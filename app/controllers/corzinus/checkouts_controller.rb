@@ -25,7 +25,7 @@ module Corzinus
 
     def update
       options = { order: current_order, params: params, person: current_person }
-      "Corzinus::Checkout::Step#{step.capitalize}".constantize.call(options) do
+      "Corzinus::Checkout::#{step.capitalize}Step".constantize.call(options) do
         on(:valid) { render_wizard current_order }
         on(:invalid) do |step_results|
           expose step_results if step_results

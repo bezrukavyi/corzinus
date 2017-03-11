@@ -1,12 +1,12 @@
 module Corzinus
-  describe Checkout::StepConfirm do
+  describe Checkout::ConfirmStep do
     let(:order) { create :corzinus_order, :full_package, person: nil }
     let(:user) { create :typical_user }
     let(:params) { { confirm: true } }
 
     context 'valid' do
       subject do
-        Checkout::StepConfirm.new(order: order, person: user, params: params)
+        Checkout::ConfirmStep.new(order: order, person: user, params: params)
       end
 
       it 'set broadcast' do
@@ -21,7 +21,7 @@ module Corzinus
 
     context 'invalid' do
       subject do
-        Checkout::StepConfirm.new(order: order, person: user, params: nil)
+        Checkout::ConfirmStep.new(order: order, person: user, params: nil)
       end
       it 'set broadcast' do
         expect { subject.call }.to broadcast(:invalid)

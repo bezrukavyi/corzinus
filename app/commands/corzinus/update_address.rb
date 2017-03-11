@@ -1,5 +1,5 @@
 module Corzinus
-  class UpdateAddress < Checkout::StepAddress
+  class UpdateAddress < Checkout::AddressStep
     def initialize(options)
       @addressable = options[:addressable]
       @params = options[:params]

@@ -1,6 +1,6 @@
 module Corzinus
   module Checkout
-    class StepAddress < Rectify::Command
+    class AddressStep < Rectify::Command
       include Corzinus::AddressableAttrubutes
 
       attr_reader :addressable, :addresses, :params

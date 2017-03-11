@@ -1,5 +1,5 @@
 module Corzinus
-  describe Checkout::StepPayment do
+  describe Checkout::PaymentStep do
     let(:order) { create :corzinus_order }
 
     context 'valid' do
@@ -15,7 +15,7 @@ module Corzinus
         let(:credit_card) do
           CreditCardForm.from_params(params[:order][:credit_card_attributes])
         end
-        subject { Checkout::StepPayment.new(order: order, params: params) }
+        subject { Checkout::PaymentStep.new(order: order, params: params) }
         before do
           expect(CreditCardForm).to receive(:from_params)
             .with(params[:order][:credit_card_attributes])
@@ -38,12 +38,12 @@ module Corzinus
         let(:payment_form) { CreditCardForm.from_model(@credit_card) }
 
         before do
-          allow_any_instance_of(Checkout::StepPayment).to receive(:payment_form)
+          allow_any_instance_of(Checkout::PaymentStep).to receive(:payment_form)
             .and_return(payment_form)
         end
 
         subject do
-          Checkout::StepPayment.new(order: order, params: params)
+          Checkout::PaymentStep.new(order: order, params: params)
         end
 
         it 'set credit_card to order' do

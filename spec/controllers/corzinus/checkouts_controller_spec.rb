@@ -96,19 +96,19 @@ module Corzinus
       context 'address step' do
         let(:params) { { id: :address, order: {} } }
 
-        it 'Corzinus::Checkout::StepAddress call' do
-          expect(Checkout::StepAddress).to receive(:call)
+        it 'Corzinus::Checkout::AddressStep call' do
+          expect(Checkout::AddressStep).to receive(:call)
           put :update, params: params
         end
 
         it 'success update' do
-          stub_const('Corzinus::Checkout::StepAddress', Support::Command::Valid)
+          stub_const('Corzinus::Checkout::AddressStep', Support::Command::Valid)
           put :update, params: params
           expect(response).to redirect_to checkout_path(:delivery)
         end
 
         it 'failure update' do
-          stub_const('Corzinus::Checkout::StepAddress', Support::Command::Invalid)
+          stub_const('Corzinus::Checkout::AddressStep', Support::Command::Invalid)
           put :update, params: params
           expect(response).to render_template :address
         end
@@ -117,19 +117,19 @@ module Corzinus
       context 'delivery step' do
         let(:params) { { id: :delivery, order: {} } }
 
-        it 'Corzinus::Checkout::StepDelivery call' do
-          expect(Checkout::StepDelivery).to receive(:call)
+        it 'Corzinus::Checkout::DeliveryStep call' do
+          expect(Checkout::DeliveryStep).to receive(:call)
           put :update, params: params
         end
 
         it 'success update' do
-          stub_const('Corzinus::Checkout::StepDelivery', Support::Command::Valid)
+          stub_const('Corzinus::Checkout::DeliveryStep', Support::Command::Valid)
           put :update, params: params
           expect(response).to redirect_to checkout_path(:payment)
         end
 
         it 'failure update' do
-          stub_const('Corzinus::Checkout::StepDelivery', Support::Command::Invalid)
+          stub_const('Corzinus::Checkout::DeliveryStep', Support::Command::Invalid)
           put :update, params: params
           expect(response).to render_template :delivery
         end
@@ -138,19 +138,19 @@ module Corzinus
       context 'payment step' do
         let(:params) { { id: :payment, order: {} } }
 
-        it 'Corzinus::Checkout::StepPayment call' do
-          expect(Checkout::StepPayment).to receive(:call)
+        it 'Corzinus::Checkout::PaymentStep call' do
+          expect(Checkout::PaymentStep).to receive(:call)
           put :update, params: params
         end
 
         it 'success update' do
-          stub_const('Corzinus::Checkout::StepPayment', Support::Command::Valid)
+          stub_const('Corzinus::Checkout::PaymentStep', Support::Command::Valid)
           put :update, params: params
           expect(response).to redirect_to checkout_path(:confirm)
         end
 
         it 'failure update' do
-          stub_const('Corzinus::Checkout::StepPayment', Support::Command::Invalid)
+          stub_const('Corzinus::Checkout::PaymentStep', Support::Command::Invalid)
           put :update, params: params
           expect(response).to render_template :payment
         end
@@ -159,19 +159,19 @@ module Corzinus
       context 'confirm step' do
         let(:params) { { id: :confirm, confirm: true } }
 
-        it 'Corzinus::Checkout::StepConfirm call' do
-          expect(Checkout::StepConfirm).to receive(:call)
+        it 'Corzinus::Checkout::ConfirmStep call' do
+          expect(Checkout::ConfirmStep).to receive(:call)
           put :update, params: params
         end
 
         it 'success update' do
-          stub_const('Corzinus::Checkout::StepConfirm', Support::Command::Valid)
+          stub_const('Corzinus::Checkout::ConfirmStep', Support::Command::Valid)
           put :update, params: params
           expect(response).to redirect_to checkout_path(:complete)
         end
 
         it 'failure update' do
-          stub_const('Corzinus::Checkout::StepConfirm', Support::Command::Invalid)
+          stub_const('Corzinus::Checkout::ConfirmStep', Support::Command::Invalid)
           put :update, params: params
           expect(response).to render_template :confirm
         end

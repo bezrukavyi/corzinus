@@ -1,6 +1,6 @@
 module Corzinus
   module Checkout
-    class StepConfirm < Rectify::Command
+    class ConfirmStep < Rectify::Command
       attr_reader :order, :person, :confirm
 
       def initialize(options)

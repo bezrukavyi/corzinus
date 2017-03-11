@@ -1,11 +1,11 @@
 module Corzinus
-  describe Checkout::StepDelivery do
+  describe Checkout::DeliveryStep do
     let(:order) { create :corzinus_order, :with_products }
     let(:delivery) { create :corzinus_delivery }
     let(:params) { { delivery_id: delivery.id } }
 
     describe '#call' do
-      subject { Checkout::StepDelivery.new(order: order, params: params) }
+      subject { Checkout::DeliveryStep.new(order: order, params: params) }
 
       context 'valid' do
         it ':valid broadcast' do

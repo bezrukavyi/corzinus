@@ -1,6 +1,6 @@
 module Corzinus
   module Checkout
-    class StepDelivery < Rectify::Command
+    class DeliveryStep < Rectify::Command
       attr_reader :order, :delivery_id
 
       def initialize(options)

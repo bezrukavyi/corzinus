@@ -1,10 +1,10 @@
 module Corzinus
-  describe Checkout::StepAddress do
+  describe Checkout::AddressStep do
     let(:order) { create :corzinus_order }
 
     context 'valid' do
       let(:params) { { order: double('order'), use_base_address: true } }
-      subject { Checkout::StepAddress.new(order: order, params: params) }
+      subject { Checkout::AddressStep.new(order: order, params: params) }
       %i(shipping billing).each do |type|
         let(:"#{type}_form") do
           AddressForm.from_params(attributes_for(:corzinus_address_order,
@@ -13,7 +13,7 @@ module Corzinus
       end
 
       before do
-        expect_any_instance_of(Checkout::StepAddress)
+        expect_any_instance_of(Checkout::AddressStep)
           .to receive(:addresses_by_params)
           .with(params[:order], params[:use_base_address])
           .and_return([shipping_form, billing_form])
@@ -37,13 +37,13 @@ module Corzinus
 
     context 'invalid' do
       let(:params) { { use_base_address: false } }
-      subject { Checkout::StepAddress.new(order: order, params: params) }
+      subject { Checkout::AddressStep.new(order: order, params: params) }
       let(:invalid_form) do
         AddressForm.from_params(attributes_for(:corzinus_address_order,
                                                :invalid))
       end
       before do
-        expect_any_instance_of(Checkout::StepAddress)
+        expect_any_instance_of(Checkout::AddressStep)
           .to receive(:addresses_by_params)
           .and_return([invalid_form])
       end

@@ -1,6 +1,6 @@
 module Corzinus
   module Checkout
-    class StepPayment < Rectify::Command
+    class PaymentStep < Rectify::Command
       attr_reader :order, :payment_form
 
       def initialize(options)
