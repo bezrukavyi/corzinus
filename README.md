@@ -1,14 +1,14 @@
 # Corzinus
 Corzinus is plugin which have logic of cart and checkout. That will be useful for your online-store
 
- 1. [Get started](#get-started)
- 2. [Configuration](#configuration)
- 2. [What you will get?](#what-you-will-get?)
+[Get started](#get-started)
+[Configuration](#configuration)
+[What you will get?](#what-you-will-get?)
   - [Cart](#cart)
   - [Checkout](#checkout)
- 3. [Corzinus components](#corzinus-components)
-  - [Order](#order)
-  - [Address](#address)
+  - [Corzinus models](#corzinus-components)
+    - [Order](#order)
+    - [Address](#address)
 
 ---
 
@@ -67,9 +67,9 @@ With corzinus you get opportunity to ordering purchase by checkout. By default c
 `:delivery` depends on the `:address`
 
 
-## Corzinus models
+### Corzinus models
 
-### Order
+#### Order
 
 Order has attributes:
 - `string :state`
@@ -102,7 +102,7 @@ You can change this states by aasm-transactions
 | `:delivered`   | from: `:in_transit` to: `:delivered`
 | `:cancel`      | from: `:processing` to: `:canceled`
 
-### Address
+#### Address
 Address has attributes:
 - `string :first_name`
 - `string :last_name`
@@ -115,7 +115,7 @@ Address has relationships:
 - `addressable`
 - `country`
 
-#### Work with relationships
+##### Work with relationships
 You can use Corzinus helper `include Corzinus::Relatable::Address` for add relationship to your model
 ```ruby
 ...
@@ -126,38 +126,31 @@ has_addres :billing # or :shipping
 ...
 ```
 
-#### Work with address form object
-You can generate instance variable of form object in your controller or something else with Corzinus helpers
-You need include concern `Corzinus::AddressableAttrubutes`
+##### Work with address form object
+You can generate instance variable of form object with Corzinus helpers.
+You need include concern `Corzinus::AddressableAttrubutes` in your controller or something else.
 ```ruby
 ...
 include Corzinus::AddressableAttrubutes
 ...
 ```
-Then you have this helpers:
-- `addresses_by_model(object)`
-- `addresses_by_params(params)`
-- `address_by_params(params)`
-- `set_countries`
-```ruby
-# Return form object varibles @billing and @shipping from the object's attributes
-addresses_by_model(object)
-# Return form object varibles @billing and @shipping from params
-addresses_by_params(params)
-# Return form object with name params[:address_type] from params
-address_by_params(params)
-# Return all countries with :id, :name, :code in varible @countries
-set_countries
-```
+Then you have:
 
-#### Work with address form object
+| Method                         | Description                                
+| ------------------------------ | -------------------------------------------
+| `addresses_by_model(object)`   | Return form object varibles `@billing` and `@shipping` from the `object` attributes
+| `addresses_by_params(params)`  | Return form object varibles `@billing` and `@shipping` from `params`
+| `address_by_params(params)`    | Return form object with name `params[:address_type]` from `params`
+| `set_countries`                | Return all countries with :id, :name, :code in varible `@countries`
+
+##### Work with address form object
 Corzinus use [Rectify::Command](https://github.com/andypike/rectify#commands)
 You can update object's address by use command `Corzinus::UpdateAddress`
 ```ruby
 Corzinus::UpdateAddress.call(addressable: user, params: params)
 ```
 
-#### Full example
+##### Full example
 You can use corzinus address for your model
 Full example for `User`:
 
@@ -166,7 +159,7 @@ In `models/user.rb`:
 class User < ApplicationRecord
   include Corzinus::Relatable::Address
 
-  has_addres :billing # or :shipping
+  has_address :billing # or :shipping
 end
 ```
 
