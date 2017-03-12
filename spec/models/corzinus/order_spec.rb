@@ -9,17 +9,15 @@ module Corzinus
       it { should have_many(:order_items) }
       it { should have_one(:coupon) }
       it { should accept_nested_attributes_for(:order_items) }
-
-      # it_behaves_like 'addressable_relation'
     end
 
     context 'aasm state' do
-      it 'processing -> in_progress' do
-        expect(subject).to transition_from(:processing).to(:in_progress)
+      it 'in_progress -> processing' do
+        expect(subject).to transition_from(:in_progress).to(:processing)
           .on_event(:confirm)
       end
-      it 'in_progress -> in_transit' do
-        expect(subject).to transition_from(:in_progress).to(:in_transit)
+      it 'processing -> in_transit' do
+        expect(subject).to transition_from(:processing).to(:in_transit)
           .on_event(:sent)
       end
       it 'in_transit -> delivered' do
@@ -27,7 +25,7 @@ module Corzinus
           .on_event(:delivered)
       end
       it 'in_progress -> cancel' do
-        expect(subject).to transition_from(:in_progress).to(:canceled)
+        expect(subject).to transition_from(:processing).to(:canceled)
           .on_event(:cancel)
       end
     end

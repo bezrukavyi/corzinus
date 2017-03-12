@@ -19,18 +19,18 @@ module Corzinus
     scope :with_persons, -> { where.not(person_id: nil) }
 
     aasm column: :state, whiny_transitions: false do
-      state :processing, initial: true
-      state :in_progress
+      state :in_progress, initial: true
+      state :processing
       state :in_transit
       state :delivered
       state :canceled
 
       event :confirm do
-        transitions from: :processing, to: :in_progress
+        transitions from: :in_progress, to: :processing
       end
 
       event :sent do
-        transitions from: :in_progress, to: :in_transit
+        transitions from: :processing, to: :in_transit
       end
 
       event :delivered do
@@ -38,7 +38,7 @@ module Corzinus
       end
 
       event :cancel do
-        transitions from: :in_progress, to: :canceled
+        transitions from: :processing, to: :canceled
       end
     end
 

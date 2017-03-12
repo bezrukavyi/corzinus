@@ -25,10 +25,10 @@ module Corzinus
     private
 
     def set_current_order
-      order = Order.find_by(id: session[:order_id], state: 'processing')
+      order = Order.find_by(id: session[:order_id], state: 'in_progress')
       order ||= Order.create
       if current_person
-        order = current_person.order_in_processing.merge_order!(order)
+        order = current_person.order_in_progress.merge_order!(order)
       end
       session[:order_id] = order.id
       order

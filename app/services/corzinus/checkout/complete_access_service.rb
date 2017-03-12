@@ -3,7 +3,7 @@ module Corzinus
     class CompleteAccessService < AccessService
       def allow?
         return true if order.items_count.zero?
-        super && order.in_progress?
+        super && order.processing?
       end
     end
   end

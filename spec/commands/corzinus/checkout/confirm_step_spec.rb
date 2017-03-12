@@ -14,8 +14,8 @@ module Corzinus
       end
 
       it 'change order state' do
-        expect { subject.call }.to change(order, :state).from('processing')
-          .to('in_progress')
+        expect { subject.call }.to change(order, :state).from('in_progress')
+          .to('processing')
       end
     end
 

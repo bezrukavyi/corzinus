@@ -33,7 +33,7 @@ module Corzinus
 
         it 'merge order' do
           person_order = create :corzinus_order
-          expect(person).to receive(:order_in_processing)
+          expect(person).to receive(:order_in_progress)
             .and_return(person_order)
           expect(person_order).to receive(:merge_order!).with(order)
             .and_return(order)

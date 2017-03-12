@@ -11,12 +11,12 @@ module Corzinus
         end
       end
 
-      def order_in_processing
-        @order_in_processing ||= orders.processing.last || orders.create
+      def order_in_progress
+        @order_in_progress ||= orders.in_progress.last || orders.create
       end
 
       def complete_order
-        @complete_order ||= orders.in_progress.last
+        @complete_order ||= orders.processing.last
       end
 
       def purchase(productable)
