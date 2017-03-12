@@ -1,5 +1,4 @@
 = link_to order_item_path(order_item),
-          data: { confirm: t('corzinus.sure?') },
-          method: :delete, class: 'btn btn-default' do
-
+  data: { confirm: t('corzinus.sure?') }, method: :delete,
+  class: 'close corzinus-cart-close' do
   %span{'aria-hidden': "true"} &times;

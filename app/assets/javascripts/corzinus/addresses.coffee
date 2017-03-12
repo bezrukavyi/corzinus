@@ -1,4 +1,4 @@
-$(document).on 'ready', ->
+$(document).on "turbolinks:load", ->
   setCodePlaceholder = (element, code) ->
     placeholder = $(element).attr('placeholder').replace(/\s\(\+\d+\)/, '')
     new_placeholder = "#{placeholder} (+#{code})" if code

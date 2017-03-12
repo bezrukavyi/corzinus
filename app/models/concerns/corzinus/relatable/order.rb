@@ -22,7 +22,7 @@ module Corzinus
       def purchase(productable)
         orders.delivered
               .joins(:order_items)
-              .where('order_items.productable_id = ?', productable.id)
+              .where('corzinus_order_items.productable_id = ?', productable.id)
       end
 
       def bought_product?(productable)

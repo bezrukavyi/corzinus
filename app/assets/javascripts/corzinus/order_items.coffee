@@ -1,4 +1,4 @@
-$(document).on 'ready', ->
+$(document).on "turbolinks:load", ->
   quantity_button = (button_class, type) ->
     $(button_class).click ->
       console.log(button_class)

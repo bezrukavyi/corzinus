@@ -4,7 +4,7 @@ module Corzinus
     include AddressableAttrubutes
     include Rectify::ControllerHelpers
 
-    before_action :authenticate_person!
+    before_action :authenticate_corzinus_person!
 
     before_action :set_steps
     before_action :setup_wizard

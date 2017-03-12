@@ -1,4 +1,4 @@
-$(document).on 'ready', ->
+$(document).on "turbolinks:load", ->
   $('#use_base_address').click ->
     $('#shipping_fields').slideToggle()
 

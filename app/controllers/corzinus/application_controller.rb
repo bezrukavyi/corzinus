@@ -1,5 +1,5 @@
 module Corzinus
-  class ApplicationController < ActionController::Base
+  class ApplicationController < ::ApplicationController
     include Corzinus::Controllable
     include Flashable
 

@@ -36,8 +36,8 @@ module Corzinus
       path = 'app/assets/stylesheets/application.css'
       insert = '*= require corzinus'
       return if File.readlines(path).grep(insert).any?
-      inject_into_file path, before: ' *= require_tree .' do
-        " #{insert}\n"
+      inject_into_file path, after: ' *= require_self' do
+        "\n #{insert}"
       end
     end
 

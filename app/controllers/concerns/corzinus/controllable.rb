@@ -7,7 +7,7 @@ module Corzinus
       helper_method :current_person
     end
 
-    def authenticate_person!
+    def authenticate_corzinus_person!
       auth_method = "authenticate_#{Corzinus.person_class.underscore}!"
       send(auth_method) if respond_to?(auth_method)
     end
