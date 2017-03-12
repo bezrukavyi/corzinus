@@ -1,14 +1,13 @@
 # Corzinus
 Corzinus is plugin which have logic of cart and checkout. That will be useful for your online-store
 
- 1. [Get started](#get-started)
- 2. [Configuration](#configuration)
- 2. [What you will get?](#what-you-will-get?)
-  - [Cart](#cart)
-  - [Checkout](#checkout)
- 3. [Corzinus components](#corzinus-components)
-  - [Order](#order)
-  - [Address](#address)
+1. [Get started](#get-started)
+2. [Configuration](#configuration)
+3. [What you can use?](#what-you-will-get?)
+    - [Cart](#cart)
+    - [Checkout](#checkout)
+    - [Order](#order)
+    - [Address](#address)
 
 ---
 
@@ -66,8 +65,6 @@ With corzinus you get opportunity to ordering purchase by checkout. By default c
 
 `:delivery` depends on the `:address`
 
-
-## Corzinus models
 
 ### Order
 
@@ -127,28 +124,21 @@ has_addres :billing # or :shipping
 ```
 
 #### Work with address form object
-You can generate instance variable of form object in your controller or something else with Corzinus helpers
-You need include concern `Corzinus::AddressableAttrubutes`
+You can generate instance variable of form object with Corzinus helpers.
+You need include concern `Corzinus::AddressableAttrubutes` in your controller or something else.
 ```ruby
 ...
 include Corzinus::AddressableAttrubutes
 ...
 ```
-Then you have this helpers:
-- `addresses_by_model(object)`
-- `addresses_by_params(params)`
-- `address_by_params(params)`
-- `set_countries`
-```ruby
-# Return form object varibles @billing and @shipping from the object's attributes
-addresses_by_model(object)
-# Return form object varibles @billing and @shipping from params
-addresses_by_params(params)
-# Return form object with name params[:address_type] from params
-address_by_params(params)
-# Return all countries with :id, :name, :code in varible @countries
-set_countries
-```
+Then you have:
+
+| Method                         | Description                                
+| ------------------------------ | -------------------------------------------
+| `addresses_by_model(object)`   | Return form object varibles `@billing` and `@shipping` from the `object` attributes
+| `addresses_by_params(params)`  | Return form object varibles `@billing` and `@shipping` from `params`
+| `address_by_params(params)`    | Return form object with name `params[:address_type]` from `params`
+| `set_countries`                | Return all countries with :id, :name, :code in varible `@countries`
 
 #### Work with address form object
 Corzinus use [Rectify::Command](https://github.com/andypike/rectify#commands)
@@ -166,7 +156,7 @@ In `models/user.rb`:
 class User < ApplicationRecord
   include Corzinus::Relatable::Address
 
-  has_addres :billing # or :shipping
+  has_address :billing # or :shipping
 end
 ```
 
