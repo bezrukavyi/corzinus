@@ -2,7 +2,7 @@ module Corzinus
   class CorzinusGenerator < Rails::Generators::Base
     source_root File.expand_path('../templates', __FILE__)
 
-    desc 'Generates a migration file, corzinus routes and require assets'
+    argument :model_name, required: true
 
     desc <<-DESC.strip_heredoc
     It do:
@@ -10,6 +10,7 @@ module Corzinus
       2. create migration files
       3. require assets
       4. include to ApplicationController corzinus controller methods and helpers
+      5. include to app/models/MODEL_NAME.rb helper and relationship to orders
     DESC
 
     def add_corzinus_routes
@@ -38,6 +39,17 @@ module Corzinus
       return if File.readlines(path).grep(insert).any?
       inject_into_file path, after: ' *= require_self' do
         "\n #{insert}"
+      end
+    end
+
+    def include_model_relationship
+      model_class = model_name.underscore.camelize
+      path = "app/models/#{model_name.underscore}.rb"
+      return if File.readlines(path).grep(/include Corzinus::Relatable::Order/).any?
+      inject_into_file path, after: "class #{model_class} < ApplicationRecord" do
+        insert = "\n"
+        insert << "  include Corzinus::Relatable::Order\n"
+        insert << "  has_orders\n"
       end
     end
 
