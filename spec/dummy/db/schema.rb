@@ -54,10 +54,10 @@ ActiveRecord::Schema.define(version: 20170309081720) do
     t.string   "name"
     t.string   "cvv"
     t.string   "month_year"
+    t.integer  "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "person_id"
-    t.integer  "product_id"
+    t.index ["person_id"], name: "index_corzinus_credit_cards_on_person_id", using: :btree
   end
 
   create_table "corzinus_deliveries", force: :cascade do |t|
@@ -74,10 +74,10 @@ ActiveRecord::Schema.define(version: 20170309081720) do
   create_table "corzinus_order_items", force: :cascade do |t|
     t.integer  "quantity"
     t.integer  "order_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
     t.string   "productable_type"
     t.integer  "productable_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["order_id"], name: "index_corzinus_order_items_on_order_id", using: :btree
     t.index ["productable_type", "productable_id"], name: "index_corzinus_productable", using: :btree
   end
@@ -85,14 +85,15 @@ ActiveRecord::Schema.define(version: 20170309081720) do
   create_table "corzinus_orders", force: :cascade do |t|
     t.string   "state"
     t.decimal  "total_price",      precision: 10, scale: 2
+    t.boolean  "use_base_address"
     t.integer  "delivery_id"
     t.integer  "credit_card_id"
+    t.integer  "person_id"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
-    t.integer  "person_id"
-    t.boolean  "use_base_address"
     t.index ["credit_card_id"], name: "index_corzinus_orders_on_credit_card_id", using: :btree
     t.index ["delivery_id"], name: "index_corzinus_orders_on_delivery_id", using: :btree
+    t.index ["person_id"], name: "index_corzinus_orders_on_person_id", using: :btree
   end
 
   create_table "typical_products", force: :cascade do |t|
@@ -109,6 +110,27 @@ ActiveRecord::Schema.define(version: 20170309081720) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "email"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
 end

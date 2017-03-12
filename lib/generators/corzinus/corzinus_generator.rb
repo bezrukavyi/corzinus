@@ -10,7 +10,7 @@ module Corzinus
         puts 'You already have corzinus route'
         return
       end
-      corzinus_route << " => '/corzinus'"
+      corzinus_route << " => '/cart'"
       route corzinus_route
     end
 
