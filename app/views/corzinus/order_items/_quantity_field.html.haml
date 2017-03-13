@@ -1,13 +1,11 @@
 - if local_assigns[:field].present?
 
   .input-group.align-center.quantity-field
-    %div.input-link.quantity-minus
-      %i.fa.fa-minus.line-height-40
+    %div.input-link.quantity-minus.quantity-btn -
     .hidden-errors
       = field.input :quantity, as: :string, label: false,
         input_html: { class: 'form-control quantity-input' }
-    %div.input-link.quantity-plus
-      %i.fa.fa-plus.line-height-40
+    %div.input-link.quantity-plus.quantity-btn +
 
 - else
   %span.ml-30= order_item.quantity

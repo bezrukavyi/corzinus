@@ -30,21 +30,20 @@ module Corzinus
       end
     end
 
-    context '#add_item' do
+    context '#add_item!' do
       it 'when order item exist' do
         order_item = create :corzinus_order_item, order: subject
-        expect { subject.add_item(order_item.productable, 20).save }
+        expect { subject.add_item!(order_item.productable, 20).save }
           .to change { order_item.reload.quantity }.by(20)
       end
       it 'when order item not exist' do
         product = create :typical_product
-        added_item = subject.add_item(product)
-        expect { added_item.save }
+        expect { subject.add_item!(product) }
           .to change { OrderItem.count }.by(1)
       end
       it 'when order item quantity is zero' do
         product = create :typical_product
-        expect(subject.add_item(product, 0)).to be_nil
+        expect(subject.add_item!(product, 0)).to be_nil
       end
     end
 

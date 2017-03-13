@@ -10,7 +10,7 @@ module Corzinus
       end
 
       def call
-        if <%= @step_name %>_valid? && update_order
+        if form_valid? && update_order
           broadcast :valid
         else
           broadcast :invalid
@@ -19,7 +19,7 @@ module Corzinus
 
       private
 
-      def <%= @step_name %>_valid?
+      def form_valid?
         true
       end
 

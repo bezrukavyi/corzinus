@@ -9,7 +9,7 @@ module Corzinus
     end
 
     def call
-      if order_item.try(:save) && order.save
+      if added_item.valid? && order.save
         broadcast :valid, quantity
       else
         broadcast :invalid, item_errors
@@ -23,12 +23,12 @@ module Corzinus
       @productable = product_class.find_by(id: params[:productable_id])
     end
 
-    def order_item
-      @order_item ||= order.add_item(productable, quantity)
+    def added_item
+      @added_item ||= order.add_item!(productable, quantity)
     end
 
     def item_errors
-      order_item.decorate.all_errors if order_item.present?
+      added_item.decorate.all_errors if added_item.present?
     end
   end
 end

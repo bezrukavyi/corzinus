@@ -323,6 +323,29 @@ img {
   }
 }
 
+.quantity-field {
+  display: flex;
+  align-items: center;
+  input {
+    text-align: center;
+    max-width: 50px;
+    margin: 0 10px;
+  }
+}
+.quantity-btn {
+  cursor: pointer;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.2;
+  &:hover {
+    color: #000;
+    opacity: 0.5;
+  }
+}
+
 @media (min-width: $screen-md-min) {
   .res-mr-200 {
     margin-right: 200px;

@@ -1,6 +1,7 @@
 module Corzinus
   module Controllable
     extend ActiveSupport::Concern
+    include Corzinus::Flashable
 
     included do
       helper_method :current_order

@@ -3,13 +3,10 @@ Corzinus is plugin which have logic of cart and checkout. That will be useful fo
 
 1. [Get started](#get-started)
 2. [Configuration](#configuration)
-3. [What you can use?](#what-you-will-get?)
-    - [Cart](#cart)
-    - [Checkout](#checkout)
-    - [Order](#order)
-    - [Address](#address)
-
----
+3. [What you get?](#what-you-get?)
+  - [Cart](#cart)
+  - [Checkout](#checkout)
+  - [Order](#order)
 
 ## Get started
 
@@ -27,7 +24,7 @@ In `config/initializers/corzinus.rb`
 config.person_class = 'MyUserClass'
 
 # Define checkout steps
-config.checkout_steps = [:step_1, :step_2, ... :confirm, :complete]
+config.checkout_steps = [:address, :delivery, :payment, :confirm, :complete]
 ...
 ```
 ### Integration into the templates
@@ -39,7 +36,7 @@ config.checkout_steps = [:step_1, :step_2, ... :confirm, :complete]
   = button_tag 'Add to cart', type: :submit
 ```
 
-## What you will get?
+## What you get?
 
 ### Cart
 
@@ -58,15 +55,18 @@ With corzinus you get opportunity to ordering purchase by checkout. By default c
  2. `:delivery` – choose delivery method by selected shipping address in the previous step
  3. `:payment` – fill credit card requisites
  4. `:confirm` – show info about `:address` `:delivery` `:payment` steps
- 5. `:complete` – show success message about finished order and sent a [letter](#order-letter) to the user's mail
+ 5. `:complete` – show success message about finished order and sent a [letter](https://github.com/bezrukavyi/corzinus/blob/Dev/app/views/corzinus/checkout_mailer/complete.html.haml) to the user's mail
 
-`[:address, :delivery, :payment]` – are not required, so you can [disable](#disable-step) one/all of them
+`[:address, :delivery, :payment]` – are not required, so you can remove one/all of them
 `[:confirm, :complete]` – are required and can not be removed.
 
 `:delivery` depends on the `:address`
 
 
+#### You also can add [custom step](https://github.com/bezrukavyi/corzinus/wiki/How-i-can-add-custom-step%3F)
+
 ### Order
+`Corzinus::Order` is base model of Corzinus. It use in `Cart` and `Checkout`.
 
 Order has attributes:
 - `string :state`
@@ -80,7 +80,7 @@ Order has relationships:
 - `coupon`
 - `order_items`
 
-Order has 5 states by aasm
+Order has 5 states by gem [Aasm](https://github.com/aasm/aasm)
 
 | State          | Description                                
 | -------------- | -------------------------------------------
@@ -90,104 +90,4 @@ Order has 5 states by aasm
 | `:delivered`   | Order delivered to the customer (**finish state**)
 | `:canceled`    | Canceled by the manager (**finish state**)
 
-You can change this states by aasm-transactions
-
-| Event          | Changing state                                
-| -------------- | -------------------------------------------
-| `:confirm`     | from: `:in_progress` to: `:processing`
-| `:sent`        | from: `:processing` to: `:in_transit`
-| `:delivered`   | from: `:in_transit` to: `:delivered`
-| `:cancel`      | from: `:processing` to: `:canceled`
-
-### Address
-Address has attributes:
-- `string :first_name`
-- `string :last_name`
-- `string :name`
-- `string :city`
-- `string :zip`
-- `string :phone`
-
-Address has relationships:
-- `addressable`
-- `country`
-
-#### Work with relationships
-You can use Corzinus helper `include Corzinus::Relatable::Address` for add relationship to your model
-```ruby
-...
-include Corzinus::Relatable::Address
-
-has_addresses # For has_one: :billing and :shipping addresses
-has_addres :billing # or :shipping
-...
-```
-
-#### Work with address form object
-You can generate instance variable of form object with Corzinus helpers.
-You need include concern `Corzinus::AddressableAttrubutes` in your controller or something else.
-```ruby
-...
-include Corzinus::AddressableAttrubutes
-...
-```
-Then you have:
-
-| Method                         | Description                                
-| ------------------------------ | -------------------------------------------
-| `addresses_by_model(object)`   | Return form object varibles `@billing` and `@shipping` from the `object` attributes
-| `addresses_by_params(params)`  | Return form object varibles `@billing` and `@shipping` from `params`
-| `address_by_params(params)`    | Return form object with name `params[:address_type]` from `params`
-| `set_countries`                | Return all countries with :id, :name, :code in varible `@countries`
-
-#### Work with address form object
-Corzinus use [Rectify::Command](https://github.com/andypike/rectify#commands)
-You can update object's address by use command `Corzinus::UpdateAddress`
-```ruby
-Corzinus::UpdateAddress.call(addressable: user, params: params)
-```
-
-#### Full example
-You can use corzinus address for your model
-Full example for `User`:
-
-In `models/user.rb`:
-```ruby
-class User < ApplicationRecord
-  include Corzinus::Relatable::Address
-
-  has_address :billing # or :shipping
-end
-```
-
-In `controllers/users_controller.rb`
-```ruby
-class UsersController < ApplicationController
-  include Corzinus::AddressableAttrubutes
-  include Rectify::ControllerHelpers
-
-  def edit
-    addresses_by_model(current_user) #return instance varibles: @billing and @shipping form objects
-    set_countries
-  end
-
-  def update
-    Corzinus::UpdateAddress.call(addressable: current_user, params: params) do
-      on(:valid) do
-        redirect_to edit_user_path, notice: 'Success update',
-      end
-      on(:invalid) do |addresses|
-        expose addresses #return instance varibles: @billing and @shipping form objects
-        render :edit, alert: 'Failure update'
-      end
-    end
-  end
-end
-```
-
-In `views/users/edit.html.haml`
-```
-= simple_form_for @billing, url: user_path, method: :patch do |field|
-  = render 'corzinus/addresses/fields', field: field, type: 'billing'
-  = field.button :submit, 'Save'
-```
+More info in [Order](https://github.com/bezrukavyi/corzinus/wiki/Order)

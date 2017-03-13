@@ -21,10 +21,10 @@ module Corzinus
 
     ----------------------------------------------------------------------------
 
-    This will add to checkouts_steps STEP_NAME on STEP_POSITION in your corzinus
+    It will add to checkouts_steps STEP_NAME on STEP_POSITION in your corzinus
     initializer
 
-    This will create:
+    It will create:
     service for step's access --> app/services/corzinus/checkout/STEP_NAME_access_service.rb
     command for step's action --> app/commands/corzinus/checkout/STEP_NAME_step.rb
     view for step             --> app/views/corzinus/checkouts/STEP_NAME.html.haml

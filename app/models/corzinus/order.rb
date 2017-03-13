@@ -58,20 +58,20 @@ module Corzinus
       @access_deliveries ||= Delivery.where(country: address.country)
     end
 
-    def add_item(productable, quantity = 1)
+    def add_item!(productable, quantity = 1)
       return if quantity.zero?
       item = order_items.find_by(productable: productable)
       if item
-        item.increment :quantity, quantity
+        item.increment! :quantity, quantity
       else
-        order_items.new(quantity: quantity, productable: productable)
+        order_items.create(quantity: quantity, productable: productable)
       end
     end
 
     def merge_order!(order)
       return self if self == order
       order.order_items.each do |order_item|
-        add_item(order_item.productable, order_item.quantity).save
+        add_item!(order_item.productable, order_item.quantity).save
       end
       self.coupon = nil if order.coupon.present?
       order.destroy && order.coupon&.update_attributes(order: self)
