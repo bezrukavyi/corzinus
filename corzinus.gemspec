@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = Corzinus::VERSION
   s.authors     = ['Yaroslav Bezrukavyi']
   s.email       = ['yaroslav555@gmail.com']
-  s.homepage    = "http://amazon555.herokuapp.com"
+  s.homepage    = "https://github.com/bezrukavyi/corzinus/tree/Dev"
   s.summary     = 'Summary of Corzinus.'
-  s.description = 'Simple cart for your store'
+  s.description = 'Simple cart-checkout for your store'
   s.license     = 'MIT'
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
