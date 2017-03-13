@@ -4,9 +4,10 @@ Corzinus is plugin which have logic of cart and checkout. That will be useful fo
 1. [Get started](#get-started)
 2. [Configuration](#configuration)
 3. [What you get?](#what-you-get?)
-  - [Cart](#cart)
-  - [Checkout](#checkout)
-  - [Order](#order)
+    - [Cart](#cart)
+    - [Checkout](#checkout)
+    - [Order](#order)
+4. [Demo](#demo)
 
 ## Get started
 
@@ -91,3 +92,7 @@ Order has 5 states by gem [Aasm](https://github.com/aasm/aasm)
 | `:canceled`    | Canceled by the manager (**finish state**)
 
 More info in [Order](https://github.com/bezrukavyi/corzinus/wiki/Order)
+
+## Demo
+#### http://corzinus555.herokuapp.com
+#### https://github.com/bezrukavyi/amazon/tree/Corzinus
