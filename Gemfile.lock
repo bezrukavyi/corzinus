@@ -67,7 +67,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     arel (7.1.4)
     ast (2.3.0)
-    autoprefixer-rails (6.7.6)
+    autoprefixer-rails (6.7.7)
       execjs
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -297,6 +297,7 @@ PLATFORMS
 
 DEPENDENCIES
   brakeman
+  cancancan
   capybara
   capybara-email
   capybara-screenshot
@@ -307,7 +308,7 @@ DEPENDENCIES
   ffaker
   letter_opener_web
   overcommit
-  pg
+  pg (~> 0.18)
   poltergeist
   pry
   rails-controller-testing

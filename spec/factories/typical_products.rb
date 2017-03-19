@@ -7,5 +7,9 @@ FactoryGirl.define do
     trait :invalid do
       title nil
     end
+
+    trait :with_inventory do
+      inventory { create :corzinus_inventory }
+    end
   end
 end

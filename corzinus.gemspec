@@ -31,9 +31,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails'
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'turbolinks', '~> 5'
+  # s.add_dependency 'groupdate'
 
-  s.add_development_dependency 'pg'
+  s.add_development_dependency 'pg', '~> 0.18'
   s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'cancancan'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'capybara-email'
   s.add_development_dependency 'capybara-screenshot'

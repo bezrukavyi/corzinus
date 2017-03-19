@@ -26,6 +26,10 @@ module Corzinus
       state :canceled
 
       event :confirm do
+        before do
+          set_paid_at
+          decrease_stock!
+        end
         transitions from: :in_progress, to: :processing
       end
 
@@ -99,6 +103,14 @@ module Corzinus
     end
 
     private
+
+    def set_paid_at
+      self.paid_at = DateTime.now
+    end
+
+    def decrease_stock!
+      order_items.map(&:decrease_stock!)
+    end
 
     def update_total_price
       self.coupon = nil if items_count.zero?

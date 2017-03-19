@@ -30,6 +30,19 @@ module Corzinus
       end
     end
 
+    describe 'aasm #confirm' do
+      it '#set_paid_at' do
+        expect { subject.confirm }.to change { subject.paid_at }
+      end
+      it '#decrease_stock!' do
+        subject = create :corzinus_order, :with_products
+        subject.order_items.each do |order_item|
+          expect(order_item).to receive(:decrease_stock!)
+        end
+        subject.confirm
+      end
+    end
+
     context '#add_item!' do
       it 'when order item exist' do
         order_item = create :corzinus_order_item, order: subject

@@ -3,7 +3,11 @@ FactoryGirl.define do
     person nil
 
     trait :with_products do
-      order_items { create_list(:corzinus_order_item, 2) }
+      order_items { create_list(:corzinus_order_item, 2, quantity: 1) }
+    end
+
+    trait :with_product do
+      order_items { [create(:corzinus_order_item, quantity: 1)] }
     end
 
     trait :with_addresses do

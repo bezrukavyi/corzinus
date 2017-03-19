@@ -14,27 +14,19 @@ module Corzinus
       it do
         should validate_numericality_of(:quantity).is_less_than_or_equal_to(99)
       end
-
-      describe '#stock_validate' do
-        it 'invalid' do
-          subject.productable.count = 5
-          subject.quantity = 6
-          subject.valid?
-          expect(subject.errors.full_messages).to include('Quantity ' +
-            I18n.t('corzinus.validators.order_item.stock'))
-        end
-        it 'valid' do
-          subject.productable.count = 5
-          subject.quantity = 4
-          expect(subject).to be_valid
-        end
-      end
     end
 
     it '#sub_total' do
       subject.productable = create :typical_product, price: 10
       subject.quantity = 2
       expect(subject.sub_total).to eq(20)
+    end
+
+    it '#decrease_stock!' do
+      quantity_change = subject.quantity * -1
+      expect { subject.decrease_stock! }
+        .to change { subject.productable.inventory.reload.count }
+        .by(quantity_change)
     end
 
     context 'Before validation' do
