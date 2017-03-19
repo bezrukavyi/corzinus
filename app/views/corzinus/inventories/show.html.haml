@@ -1,0 +1,30 @@
+%table.table
+  %thead
+    %tr
+      %th Date
+      %th Start Stock
+      %th Demand
+      %th Finish Stock
+      %th Send supply
+  %tbody
+    - @inventory.sales.each do |sale|
+      %tr
+        %td= sale.created_at.strftime('%B, %d, %Y')
+        %td= sale.start_stock
+        %td= sale.demand
+        %td= sale.finish_stock
+        %td= sale.supply.try(:size) || 0
+
+
+%table.table
+  %thead
+    %tr
+      %th Created
+      %th Arrived
+      %th Size
+  %tbody
+    - @inventory.supplies.each do |supply|
+      %tr
+        %td= supply.created_at.strftime('%B, %d, %Y')
+        %td= supply.arrived_at.strftime('%B, %d, %Y')
+        %td= supply.size

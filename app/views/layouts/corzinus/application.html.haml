@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %meta{ content: "text/html; charset=UTF-8", 'http-equiv': 'Content-Type' }
+    %title Corzinus
+    %meta{ content: 'width=device-width', name: 'viewport' }
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+
+    .header-messages
+      - flash.each do |key, value|
+        %div{ class: "alert alert-#{alert_class(key)}" }= value
+
+    = yield

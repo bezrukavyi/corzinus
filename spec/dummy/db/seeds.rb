@@ -1,7 +1,7 @@
-DAYS = 1
+DAYS = 100
 DEMAND = 0..10
 
-TypicalProduct.find_or_create_by!(title: FFaker::Book.title) do |product|
+created_product = TypicalProduct.find_or_create_by!(title: FFaker::Book.title) do |product|
   product.price = rand(10.00..20.00)
   product.inventory = Corzinus::Inventory.create(count: 100)
 end
@@ -55,23 +55,26 @@ TypicalUser.find_each do |user|
     billing.phone = "+#{country.code}632863823"
   end
 
-  DAYS.times do |day_number|
+  DAYS.downto(0) do |day_number|
+    date = DateTime.now - day_number.to_i.day
+
     created_order = Corzinus::Order.create! do |order|
       order.credit_card = created_card.dup
       order.shipping = user.shipping.dup
       order.billing = user.billing.dup
       order.delivery = country.deliveries.first
-      order.created_at = DateTime.now - day_number.to_i.day
+      order.created_at = date
     end
 
-    Corzinus::OrderItem.create! do |item|
+    created_item = Corzinus::OrderItem.create do |item|
       item.quantity = rand(DEMAND)
       item.productable_id = TypicalProduct.first.id
       item.productable_type = 'TypicalProduct'
       created_order.order_items << item
     end
 
-    created_order.confirm
+    created_order.confirm!
+    created_product.reload.inventory.add_sale(date)
     user.orders << created_order
   end
 

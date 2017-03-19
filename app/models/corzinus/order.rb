@@ -27,7 +27,6 @@ module Corzinus
 
       event :confirm do
         before do
-          set_paid_at
           decrease_stock!
         end
         transitions from: :in_progress, to: :processing
@@ -105,10 +104,11 @@ module Corzinus
     private
 
     def set_paid_at
-      self.paid_at = DateTime.now
+      self.paid_at = Time.zone.now
     end
 
     def decrease_stock!
+      return unless order_items.all?(&:valid?)
       order_items.map(&:decrease_stock!)
     end
 

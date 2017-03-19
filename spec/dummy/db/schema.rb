@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318195429) do
+ActiveRecord::Schema.define(version: 20170319121949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,17 @@ ActiveRecord::Schema.define(version: 20170318195429) do
     t.integer  "inventory_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "demand"
     t.index ["inventory_id"], name: "index_corzinus_inventory_sales_on_inventory_id", using: :btree
+  end
+
+  create_table "corzinus_inventory_supplies", force: :cascade do |t|
+    t.integer  "size"
+    t.datetime "arrived_at"
+    t.integer  "inventory_sale_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["inventory_sale_id"], name: "index_corzinus_inventory_supplies_on_inventory_sale_id", using: :btree
   end
 
   create_table "corzinus_order_items", force: :cascade do |t|
