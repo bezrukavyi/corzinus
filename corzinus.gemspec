@@ -31,7 +31,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails'
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'turbolinks', '~> 5'
-  # s.add_dependency 'groupdate'
+  s.add_dependency 'chartkick'
+  s.add_dependency 'highcharts-rails'
 
   s.add_development_dependency 'pg', '~> 0.18'
   s.add_development_dependency 'rspec-rails'
@@ -54,4 +55,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'letter_opener_web'
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'capybara-webkit'
+  s.add_development_dependency 'rails_best_practices'
 end

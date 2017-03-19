@@ -14,8 +14,7 @@ module Corzinus
       Checkout::AccessStep.call(current_order, step) do
         on(:allow) { render_wizard }
         on(:not_allow) do
-          redirect_to checkout_path(previous_step),
-                      alert: t('corzinus.flash.failure.step')
+          redirect_to checkout_path(previous_step), alert: t('corzinus.flash.failure.step')
         end
         on(:empty_cart) do
           redirect_to edit_cart_path, alert: t('corzinus.flash.failure.empty_cart')

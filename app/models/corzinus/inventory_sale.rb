@@ -19,5 +19,10 @@ module Corzinus
       size = inventory.average_demand * InventorySupply::TIME_RESERVE
       create_supply(size: size)
     end
+
+    def demand
+      super_demand = super
+      super_demand.blank? ? (start_stock - inventory.count) : super_demand
+    end
   end
 end

@@ -1,30 +1,46 @@
-%table.table
-  %thead
-    %tr
-      %th Date
-      %th Start Stock
-      %th Demand
-      %th Finish Stock
-      %th Send supply
-  %tbody
-    - @inventory.sales.each do |sale|
-      %tr
-        %td= sale.created_at.strftime('%B, %d, %Y')
-        %td= sale.start_stock
-        %td= sale.demand
-        %td= sale.finish_stock
-        %td= sale.supply.try(:size) || 0
+%main.container.corzinus-main-wrap
+  %h1.corzinus-title-margin= t('corzinus.inventory.title')
 
 
-%table.table
-  %thead
-    %tr
-      %th Created
-      %th Arrived
-      %th Size
-  %tbody
-    - @inventory.supplies.each do |supply|
+  .row.mb-20
+    .col-md-6
+      %table.table
+        %thead
+          %tr
+            %th= t('corzinus.inventory.date')
+            %th= t('corzinus.inventory.start_stock')
+            %th= t('corzinus.inventory.finish_stock')
+            %th= t('corzinus.inventory.demand')
+            %th= t('corzinus.inventory.sent_supply')
+        %tbody
+          - @inventory.sales.each do |sale|
+            %tr
+              %td= sale.decorate.created_strftime
+              %td= sale.start_stock
+              %td= sale.decorate.finish_stock
+              %td= sale.demand
+              %td= sale.decorate.supply_size
+
+    .col-md-6
+      %h3= t('corzinus.inventory.start_stock')
+      = area_chart sale_chart(@inventory, :start_stock)
+
+      %h3= t('corzinus.inventory.sent_supply')
+      = line_chart sale_chart(@inventory, :supply_size)
+
+      %h3= t('corzinus.inventory.demand')
+      = area_chart sale_chart(@inventory, :demand)
+
+
+  %table.table
+    %thead
       %tr
-        %td= supply.created_at.strftime('%B, %d, %Y')
-        %td= supply.arrived_at.strftime('%B, %d, %Y')
-        %td= supply.size
+        %th= t('corzinus.inventory.supply.created_at')
+        %th= t('corzinus.inventory.supply.arrived_at')
+        %th= t('corzinus.inventory.supply.size')
+    %tbody
+      - @inventory.supplies.each do |supply|
+        %tr
+          %td= supply.created_at.strftime('%B, %d, %Y')
+          %td= supply.arrived_at.strftime('%B, %d, %Y')
+          %td= supply.size

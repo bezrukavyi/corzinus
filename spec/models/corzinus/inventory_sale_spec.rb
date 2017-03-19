@@ -17,13 +17,11 @@ module Corzinus
 
     describe '#finish!' do
       it 'update finish_stock' do
-        expect { subject.finish!(10) }.to change { subject.finish_stock }
-          .from(nil).to(10)
+        expect { subject.finish!(10) }.to change { subject.finish_stock }.to(10)
       end
       it 'update demand' do
         subject.start_stock = 100
-        expect { subject.finish!(10) }.to change { subject.demand }
-          .from(nil).to(90)
+        expect { subject.finish!(10) }.to change { subject.demand }.to(90)
       end
     end
 

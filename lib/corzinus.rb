@@ -11,6 +11,8 @@ require 'simple_form'
 require 'jquery-rails'
 require 'coffee-rails'
 require 'turbolinks'
+require 'chartkick'
+require 'highcharts-rails'
 
 module Corzinus
   mattr_accessor :person_class

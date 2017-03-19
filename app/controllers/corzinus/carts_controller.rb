@@ -20,8 +20,7 @@ module Corzinus
     private
 
     def success_update(path, *params)
-      redirect_to send("#{path}_path", params),
-                  notice: t('corzinus.flash.success.cart_update')
+      redirect_to send("#{path}_path", params), notice: t('corzinus.flash.success.cart_update')
     end
 
     def current_order

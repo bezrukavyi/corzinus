@@ -22,7 +22,6 @@ module Corzinus
       @current_order ||= set_current_order
     end
 
-
     private
 
     def set_current_order

@@ -6,12 +6,12 @@ module Corzinus
     belongs_to :sale, class_name: 'Corzinus::InventorySale',
                       foreign_key: 'inventory_sale_id'
 
-    after_create :set_arrived_at
+    before_create :set_arrived_at
 
     private
 
     def set_arrived_at
-      update_attributes(arrived_at: sale.created_at + DELIVERY_DAYS.days)
+      self.arrived_at = sale.created_at + DELIVERY_DAYS.days
     end
   end
 end

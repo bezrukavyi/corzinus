@@ -3,12 +3,10 @@ module Corzinus
     def create
       AddOrderItem.call(current_order, params) do
         on(:valid) do |quantity|
-          flash[:notice] = t('corzinus.flash.success.product_add',
-                             count: quantity)
+          flash[:notice] = t('corzinus.flash.success.product_add', count: quantity)
         end
         on(:invalid) do |errors|
-          flash[:alert] = t('corzinus.flash.failure.product_add',
-                            errors: errors)
+          flash[:alert] = t('corzinus.flash.failure.product_add', errors: errors)
         end
       end
       redirect_back(fallback_location: root_path)

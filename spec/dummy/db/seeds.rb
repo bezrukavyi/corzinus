@@ -66,7 +66,7 @@ TypicalUser.find_each do |user|
       order.created_at = date
     end
 
-    created_item = Corzinus::OrderItem.create do |item|
+    Corzinus::OrderItem.create do |item|
       item.quantity = rand(DEMAND)
       item.productable_id = TypicalProduct.first.id
       item.productable_type = 'TypicalProduct'

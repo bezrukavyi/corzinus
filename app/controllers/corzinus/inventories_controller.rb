@@ -3,7 +3,7 @@ module Corzinus
     layout 'application'
 
     def show
-      @inventory = Inventory.find(params[:id])
+      @inventory = Inventory.with_components.find(params[:id])
     end
   end
 end
