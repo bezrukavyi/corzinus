@@ -5,6 +5,8 @@ FactoryGirl.define do
   end
 
   trait :with_supply do
-    supply { create :corzinus_inventory_supply }
+    after(:create) do |sale|
+      sale.supply = create :corzinus_inventory_supply, sale: sale
+    end
   end
 end

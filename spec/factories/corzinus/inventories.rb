@@ -5,6 +5,15 @@ FactoryGirl.define do
   end
 
   trait :with_sales do
-    sales { [create(:corzinus_inventory_sale)] }
+    after(:create) do |inventory|
+      inventory.sales << create(:corzinus_inventory_sale, inventory: inventory)
+    end
+  end
+
+  trait :with_supplies do
+    after(:create) do |inventory|
+      inventory.sales = create_list :corzinus_inventory_sale, 3, :with_supply,
+                                    inventory: inventory
+    end
   end
 end

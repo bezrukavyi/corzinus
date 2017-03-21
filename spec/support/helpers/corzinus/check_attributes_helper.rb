@@ -34,7 +34,16 @@ module Corzinus
         end
       end
 
+      def check_show_link(objects, title)
+        objects = check_objects(objects)
+        objects.each do |object|
+          link_name = "#{object.class.name.demodulize.downcase}_path"
+          expect(page).to have_link(title, href: corzinus.send(link_name, object))
+        end
+      end
+
       private
+
       def check_objects(objects)
         objects.respond_to?(:each) ? objects : [objects]
       end

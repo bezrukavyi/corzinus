@@ -1,25 +1,27 @@
 %main.container.corzinus-main-wrap
-  %h1.corzinus-title-margin= t('corzinus.inventory.title')
+  %h1.corzinus-title-margin= t('corzinus.inventory.title', id: @inventory.id)
+  %h3.corzinus-title-margin= @inventory.productable.title
 
+  = link_to t('corzinus.inventory.to_all'), inventories_path,
+    class: 'center button btn btn-default mb-20'
 
   .row.mb-20
     .col-md-6
       %table.table
         %thead
           %tr
-            %th= t('corzinus.inventory.date')
-            %th= t('corzinus.inventory.start_stock')
-            %th= t('corzinus.inventory.finish_stock')
-            %th= t('corzinus.inventory.demand')
-            %th= t('corzinus.inventory.sent_supply')
+            %th= t('corzinus.inventory.supply.created_at')
+            %th= t('corzinus.inventory.supply.arrived_at')
+            %th= t('corzinus.inventory.supply.size')
         %tbody
-          - @inventory.sales.each do |sale|
+          - @inventory.supplies.each do |supply|
             %tr
-              %td= sale.decorate.created_strftime
-              %td= sale.start_stock
-              %td= sale.decorate.finish_stock
-              %td= sale.demand
-              %td= sale.decorate.supply_size
+              %td= supply.decorate.created_strftime
+              %td= supply.decorate.arrived_strftime
+              %td= supply.size
+
+      = link_to t('corzinus.inventory.to_sales'), inventory_sales_path(@inventory.id),
+        class: 'center button btn btn-default mb-20'
 
     .col-md-6
       %h3= t('corzinus.inventory.start_stock')
@@ -30,17 +32,3 @@
 
       %h3= t('corzinus.inventory.demand')
       = area_chart sale_chart(@inventory, :demand)
-
-
-  %table.table
-    %thead
-      %tr
-        %th= t('corzinus.inventory.supply.created_at')
-        %th= t('corzinus.inventory.supply.arrived_at')
-        %th= t('corzinus.inventory.supply.size')
-    %tbody
-      - @inventory.supplies.each do |supply|
-        %tr
-          %td= supply.created_at.strftime('%B, %d, %Y')
-          %td= supply.arrived_at.strftime('%B, %d, %Y')
-          %td= supply.size

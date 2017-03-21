@@ -1,0 +1,26 @@
+%main.container.corzinus-main-wrap
+  %h1.corzinus-title-margin= t('corzinus.inventories.title')
+  .page-info= page_entries_info @inventories, entry_name: 'inventory'
+
+  .row.mb-20
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th= t('corzinus.inventory.id')
+            %th= t('corzinus.inventory.created_at')
+            %th= t('corzinus.inventory.productable')
+            %th= t('corzinus.inventory.count')
+            %th= t('corzinus.inventory.nearest_supply')
+            %th= t('corzinus.more_info')
+        %tbody
+          - @inventories.each do |inventory|
+            %tr
+              %td= inventory.id
+              %td= inventory.decorate.created_strftime
+              %td= inventory.decorate.productable.title
+              %td= inventory.count
+              %td= inventory.decorate.nearest_supply_relative
+              %td= link_to t('corzinus.more'), inventory
+
+      = paginate @inventories

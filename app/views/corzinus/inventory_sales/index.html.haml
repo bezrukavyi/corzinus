@@ -1,0 +1,27 @@
+%main.container.corzinus-main-wrap
+  %h1.corzinus-title-margin= t('corzinus.inventory.title', id: @inventory.id)
+
+  = link_to t('corzinus.back'), @inventory,
+    class: 'center button btn btn-default mb-20'
+
+  .row.mb-20
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th= t('corzinus.inventory.sale.date')
+            %th= t('corzinus.inventory.sale.start_stock')
+            %th= t('corzinus.inventory.sale.finish_stock')
+            %th= t('corzinus.inventory.sale.demand')
+            %th= t('corzinus.inventory.sale.sent_supply')
+        %tbody
+          - @sales.each do |sale|
+            %tr
+              %td= sale.decorate.created_strftime
+              %td= sale.start_stock
+              %td= sale.decorate.finish_stock
+              %td= sale.demand
+              %td= sale.decorate.supply_size
+
+
+      = paginate @sales
