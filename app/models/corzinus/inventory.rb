@@ -26,8 +26,9 @@ module Corzinus
     end
 
     def demands
-      limit = InventorySupply::TIME_RESERVE + 1
-      @demands ||= sales.first(limit).pluck(:demand).compact
+      limit = InventorySupply::TIME_RESERVE
+      @demands ||= sales.select(:start_stock, :finish_stock, :inventory_id)
+                        .limit(limit).map(&:demand)
     end
 
     def sum_demands

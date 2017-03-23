@@ -1,7 +1,5 @@
 module Corzinus
   class InventorySalesController < ApplicationController
-    layout 'application'
-
     def index
       @inventory = Inventory.find(params[:inventory_id])
       @sales = InventorySale.includes(:supply).order(created_at: :desc)

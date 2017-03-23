@@ -68,5 +68,14 @@ module Corzinus
       arrived_supply = subject.supplies.where(created_at: time - delivery.days).first
       expect(subject.arrived_supply).to eq(arrived_supply)
     end
+
+    it '#demands' do
+      inventory = create :corzinus_inventory
+      10.times do |index|
+        finish_stock = index + 1
+        inventory.sales.create(start_stock: 100, finish_stock: finish_stock)
+      end
+      expect(inventory.demands).to eq([90, 91, 92, 93, 94, 95])
+    end
   end
 end

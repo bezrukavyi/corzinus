@@ -1,5 +1,5 @@
 DAYS = 150
-DEMAND = 0..10
+MAX_DEMAND = 10
 
 10.times do
   TypicalProduct.find_or_create_by!(title: FFaker::Book.title) do |product|
@@ -60,7 +60,7 @@ TypicalUser.find_each do |user|
   DAYS.downto(0) do |day_number|
     date = DateTime.now - day_number.to_i.day
 
-    rand(1..5).times do
+    TypicalProduct.find_each do |product|
       created_order = Corzinus::Order.create! do |order|
         order.credit_card = created_card.dup
         order.shipping = user.shipping.dup
@@ -70,8 +70,8 @@ TypicalUser.find_each do |user|
       end
 
       Corzinus::OrderItem.create do |item|
-        item.quantity = rand(DEMAND)
-        item.productable_id = rand(1..TypicalProduct.count)
+        item.quantity = rand(0..MAX_DEMAND)
+        item.productable_id = product.id
         item.productable_type = 'TypicalProduct'
         created_order.order_items << item
       end
@@ -80,7 +80,7 @@ TypicalUser.find_each do |user|
       user.orders << created_order
     end
 
-    TypicalProduct.all.each do |product|
+    TypicalProduct.find_each do |product|
       product.inventory.add_sale(date)
     end
   end

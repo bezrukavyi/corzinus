@@ -10,7 +10,6 @@ module Corzinus
 
     def finish!(count)
       self.finish_stock = count
-      self.demand = start_stock - count
       tap(&:save)
     end
 
@@ -21,8 +20,8 @@ module Corzinus
     end
 
     def demand
-      super_demand = super
-      super_demand.blank? ? (start_stock - inventory.count) : super_demand
+      end_stock = finish_stock || inventory.count
+      start_stock - end_stock
     end
   end
 end

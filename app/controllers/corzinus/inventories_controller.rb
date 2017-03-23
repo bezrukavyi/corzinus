@@ -1,7 +1,5 @@
 module Corzinus
   class InventoriesController < ApplicationController
-    layout 'application'
-
     def index
       @inventories = Inventory.order(:created_at).with_supplies_product.page(params[:page])
     end
