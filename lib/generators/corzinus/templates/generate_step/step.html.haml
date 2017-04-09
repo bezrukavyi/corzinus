@@ -1,0 +1,11 @@
+.container
+  = render 'step_nav'
+
+  = simple_form_for current_order, url: checkout_path, class: 'res-mb-100' do |field|
+
+    -# TODO: Some fields
+
+    .col-md-12.mb-40
+      .center-block.corzinus-text-align.center
+        = field.submit t('simple_form.titles.save_and_continue'),
+          class: 'button btn btn-default mb-20'

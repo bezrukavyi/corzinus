@@ -1,0 +1,22 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th
+        %span.in-grey-600= t('corzinus.carts.product')
+      %th.col-price
+        %span.in-grey-600= t('corzinus.carts.price')
+      %th
+        %span.in-grey-600= t('corzinus.carts.quantity')
+      %th
+        %span.in-grey-600= t('corzinus.carts.sub_total')
+      - if local_assigns[:field]
+        %th.close-link
+
+  %tbody
+    - if local_assigns[:field]
+      = field.simple_fields_for :order_items do |item_field|
+        = render 'corzinus/order_items/table_field', order_item: item_field.object,
+          field: item_field
+    - else
+      - order_items.each do |order_item|
+        = render 'corzinus/order_items/table_field', order_item: order_item

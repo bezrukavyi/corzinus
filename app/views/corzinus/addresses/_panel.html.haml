@@ -1,0 +1,13 @@
+%h3.corzinus-subtitle= t("corzinus.#{address.address_type}_address")
+%p.corzinus-address
+  = address.decorate.full_name
+  - if local_assigns[:edit]
+    %span.corzinus-edit= link_to t('edit'), checkout_path(:address)
+  %br
+  = address.name
+  %br
+  = address.decorate.city_zip
+  %br
+  = address.country.name
+  %br
+  = address.phone

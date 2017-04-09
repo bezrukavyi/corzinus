@@ -1,0 +1,24 @@
+.corzinus-cart-item.divider-lg-bottom.pt-0
+  %table.table{ class: 'table-link', 'data-href': order_state_path(order) }
+    %tr
+      %td.col-half
+        %span.in-grey-600= t('corzinus.orders.number')
+      %td.col-half
+        %span.corzinus-order-number= order.id
+    %tr
+      %td
+        %span.in-grey-600= t('corzinus.orders.completed_at')
+      %td
+        %span.in-grey-900.font-16.fw-300= order.decorate.completed_at
+    %tr
+      %td
+        %span.in-grey-600= t('corzinus.orders.status')
+      %td
+        %span.font-16.in-grey-900.fw-300{ class: state_klass(order) }
+          = t("corzinus.orders.states.#{order.state}")
+    %tr
+      %td
+        %span.in-grey-600= t('corzinus.orders.total')
+      %td
+        %strong.font-16
+          = currency_price(order.total_price)

@@ -1,0 +1,24 @@
+%main.container.corzinus-main-wrap
+  %h1.corzinus-title-margin= t('corzinus.carts.title')
+
+  - if current_order.items_count.zero?
+
+    .col-md-12.mb-40
+      .center-block.corzinus-text-align.center
+        %p.h3.in-grey-600.mb-60= t('corzinus.carts.empty_message')
+
+  - else
+
+    .visible-xs
+      = simple_form_for current_order, url: cart_path,
+        html: { id: 'update_order_mobile' } do |field|
+        = field.simple_fields_for :order_items do |item_field|
+          = render 'corzinus/order_items/order_item', order_item: item_field.object,
+            field: item_field
+        = render 'bottom_panel', field: field
+
+    .hidden-xs
+      = simple_form_for current_order, url: cart_path,
+        html: { id: 'update_order' } do |field|
+        = render 'corzinus/order_items/table', field: field
+        = render 'bottom_panel', field: field
