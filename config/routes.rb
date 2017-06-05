@@ -6,4 +6,6 @@ Corzinus::Engine.routes.draw do
   resources :inventories, only: [:show, :index] do
     resources :inventory_sales, only: :index, as: :sales
   end
+
+  resource :inventory_analysis, only: [:show, :create, :edit, :update, :new]
 end

@@ -14,6 +14,9 @@ require 'coffee-rails'
 require 'turbolinks'
 require 'chartkick'
 require 'highcharts-rails'
+require 'csv'
+require 'roo'
+require 'roo-xls'
 
 module Corzinus
   mattr_accessor :person_class

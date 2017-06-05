@@ -27,6 +27,7 @@ RSpec.configure do |config|
   config.include Shoulda::Matchers::ActiveRecord
   config.include FactoryGirl::Syntax::Methods
   config.include Rectify::RSpec::Helpers
+  config.include ActionDispatch::TestProcess
   config.include I18n
   config.extend WithModel
 

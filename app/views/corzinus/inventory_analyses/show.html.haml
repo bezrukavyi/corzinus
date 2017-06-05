@@ -1,0 +1,11 @@
+.container.general-main-wrap
+  .text-center
+    - @inventory_analysis.analysed_reserves.each do |type, profit|
+      %h3.general-login-title
+        = "Best strategy #{type} | #{profit}"
+
+    = link_to t('corzinus.inventory.to_all'), inventories_path,
+      class: 'center button btn btn-default mb-20'
+
+    = link_to 'Update', edit_inventory_analysis_path,
+      class: 'center button btn btn-primary mb-20'

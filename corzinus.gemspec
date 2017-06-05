@@ -34,6 +34,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks', '~> 5'
   s.add_dependency 'chartkick'
   s.add_dependency 'highcharts-rails'
+  s.add_dependency 'roo'
+  s.add_dependency 'roo-xls'
 
   s.add_development_dependency 'pg', '~> 0.18'
   s.add_development_dependency 'rspec-rails'
