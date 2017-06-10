@@ -1,11 +1,49 @@
 .container.general-main-wrap
+  %table.table.table-hover
+    %thead
+      %tr
+        %th
+          %span.in-grey-600= t('corzinus.inventory_analyses.rating')
+        %th
+          %span.in-grey-600= t('corzinus.inventory_analyses.strategy')
+        %th
+          %span.in-grey-600= t('corzinus.inventory_analyses.expenses')
+        %th
+          %span.in-grey-600= t('corzinus.inventory_analyses.profit')
+
+    %tbody
+    - @inventory_analysis.analysed_reserves.all_profits.each_with_index do |(strategy, profit), index|
+      - index += 1
+      %tr
+        %td
+          %span.general-order-number= "##{index}"
+        %td
+          %span.font-16.fw-300= strategy
+        %td
+          %span.in-grey-900.font-16.fw-300= @inventory_analysis.analysed_reserves.all_expenses[strategy]
+        %td
+          %span.font-16.fw-300= profit
+
   .text-center
-    - @inventory_analysis.analysed_reserves.each do |type, profit|
-      %h3.general-login-title
-        = "Best strategy #{type} | #{profit}"
 
     = link_to t('corzinus.inventory.to_all'), inventories_path,
       class: 'center button btn btn-default mb-20'
 
-    = link_to 'Update', edit_inventory_analysis_path,
+    = link_to t('corzinus.inventory_analyses.edit'), edit_inventory_analysis_path,
       class: 'center button btn btn-primary mb-20'
+
+
+  .text-center
+    - @inventory_analysis.inventories_profit.each do |strategy, inventory_profits|
+      %h2.corzinus-order-wrap= t('corzinus.inventory_analyses.strategy_index', id: strategy)
+
+      - inventory_profits.each_with_index do |profit_object, index|
+        - index += 1
+        .row
+          %h3= t('corzinus.inventory_analyses.product', id: index)
+          .col-md-6
+            %h4= t('corzinus.inventory_analyses.reserves', id: index)
+            = area_chart profits_chart(profit_object.reserves)
+          .col-md-6
+            %h4= t('corzinus.inventory_analyses.delivery', id: index)
+            = line_chart profits_chart(profit_object.deliveries_data)

@@ -43,9 +43,16 @@ ru:
         name: Имя
       coupon:
         code: Код Вашего Купон
+      inventory_analysis:
+        data: 'Входные данные (.xls, .xlsx)'
+        delivery_cost: 'Стоимость доставки'
+        warehous_cost: 'Складская стоимость'
+        reserves: 'Стратегии резервного обеспечения'
+        delivery_days: 'Период выполнения одной доставки'
     titles:
       change: Изменить
       save: Сохранить
+      settings: Настройки
       save_and_continue: Сохранить и продолжить
       forgot_password?: Забыли пароль?
       new_password: Задать новый пароль

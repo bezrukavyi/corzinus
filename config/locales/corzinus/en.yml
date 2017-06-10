@@ -58,5 +58,15 @@ en:
         canceled: Canceled
     inventory:
       title: "Inventory #%{id}"
+    inventory_analyses:
+      reserves: 'Reserves'
+      delivery: 'Delivery'
+      rating: 'Rating'
+      strategy: "Strategy"
+      strategy_index: "Strategy %{id}"
+      expenses: 'Expenses'
+      profit: 'Profit'
+      product: "Product %{id}"
+      edit: "Edit data"
     more: More
     sure?: Are you sure?

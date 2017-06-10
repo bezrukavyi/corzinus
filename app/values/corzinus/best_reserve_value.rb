@@ -33,18 +33,28 @@ module Corzinus
       @all_profits ||= calculate_all_profits
     end
 
+    def inventories_profit
+      @inventories_profit ||= @reserves.each_with_object({}) do |reserve, reserve_profit|
+        reserve_profit[reserve] = calculate_profit(reserve)
+      end.sort_by { |_type, profit_objects| -global_profit(profit_objects) }
+    end
+
+    def all_expenses
+      @all_expenses ||= calculate_all_expenses
+    end
+
     private
 
     def calculate_all_profits
-      profits = @reserves.each_with_object({}) do |reserve, reserve_profit|
-        reserve_profit[reserve] = calculate_profit(reserve)
-      end.sort_by { |_type, profit_objects| -global_profit(profit_objects) }
-
-      profits.map do |type, profit_objects|
+      inventories_profit.map do |type, profit_objects|
         [type.to_s, global_profit(profit_objects)]
       end.to_h
+    end
 
-
+    def calculate_all_expenses
+      inventories_profit.map do |type, profit_objects|
+        [type.to_s, profit_objects.map(&:expenses).sum]
+      end.to_h
     end
 
     def calculate_profit(reserve)

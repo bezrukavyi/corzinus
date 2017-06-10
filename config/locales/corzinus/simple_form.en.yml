@@ -43,8 +43,15 @@ en:
         name: Name
       coupon:
         code: Your Coupon Code
+      inventory_analysis:
+        data: 'Input data (.xls, .xlsx)'
+        delivery_cost: 'Delivery cost'
+        warehous_cost: 'Warehous cost'
+        reserves: 'Reserves strategies'
+        delivery_days: 'The period of one delivery(in days)'
     titles:
       change: Change
+      settings: Settings
       save: Save
       save_and_continue: Save and Continue
       forgot_password?: Forgot password?

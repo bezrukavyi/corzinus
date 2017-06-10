@@ -58,5 +58,15 @@ ru:
         canceled: Отменен
     inventory:
       title: "Запас #%{id}"
+    inventory_analyses:
+      reserves: 'Запасы'
+      delivery: 'Доставка'
+      rating: 'Рейтинг'
+      strategy: "Стратегия"
+      strategy_index: "Стратегия %{id}"
+      expenses: 'Издержки'
+      profit: 'Прибыль'
+      product: "Товар %{id}"
+      edit: "Редактировать данные"
     more: Больше
     sure?: Вы уверены?

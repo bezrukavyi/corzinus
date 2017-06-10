@@ -1,9 +1,9 @@
 .container.general-main-wrap
   .text-center
-    %h3.general-login-title= t('simple_form.titles.sign_up')
+    %h3.general-login-title= t('simple_form.titles.settings')
 
   .form-group.mb-30
-    = general_simple_form_for @form, url: inventory_analysis_path, method: :patch do |field|
+    = general_simple_form_for @inventory_analysis_form, url: inventory_analysis_path, method: :patch do |field|
 
       .form-group.mbz-30
         = field.input :data, as: :file
@@ -14,11 +14,12 @@
       .form-group.mbz-30
         = field.input :warehous_cost
 
+        .form-group.mbz-30
+        = field.input :delivery_days
+
       .form-group.mbz-30
         = field.input :reserves
 
-      .form-group.mbz-30
-        = field.input :delivery_days
 
       .text-center
-        = field.button :submit, 'Create',class: 'btn btn-default mb-20'
+        = field.button :submit, t('simple_form.titles.save'), class: 'btn btn-default mb-20'

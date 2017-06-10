@@ -2,12 +2,12 @@ module Corzinus
   class InventoryAnalysesController < ApplicationController
     def edit
       @inventory_analysis = InventoryAnalysis.last || InventoryAnalysis.new
-      @form = InventoryAnalysisForm.from_model(@inventory_analysis)
+      @inventory_analysis_form = InventoryAnalysisForm.from_model(@inventory_analysis)
     end
 
     def update
-      @form = InventoryAnalysisForm.from_params(params)
-      if @form.save
+      @inventory_analysis_form = InventoryAnalysisForm.from_params(params)
+      if @inventory_analysis_form.save
         redirect_to inventory_analysis_path
       else
         flash_render :edit, alert: t('corzinus.flash.failure.inventory_analysis_create')
@@ -17,8 +17,8 @@ module Corzinus
     def create
       redirect_to :show if InventoryAnalysis.last
 
-      @form = InventoryAnalysisForm.from_params(params)
-      if @form.save
+      @inventory_analysis_form = InventoryAnalysisForm.from_params(params)
+      if @inventory_analysis_form.save
         redirect_to inventory_analysis_path
       else
         flash_render :edit, alert: t('corzinus.flash.failure.inventory_analysis_create')

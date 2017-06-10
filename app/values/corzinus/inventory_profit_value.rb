@@ -40,6 +40,14 @@ module Corzinus
       end
     end
 
+    def income
+      @satisfied_demand.sum * @price
+    end
+
+    def expenses
+      (@deficit.sum * @price) + ( @deliveries_data.sum * @original_price) + @warehous_cost
+    end
+
     private
 
     def calc_satisfied_demand(index)
@@ -69,14 +77,6 @@ module Corzinus
 
     def average(array)
       array.reduce(:+) * 1.0 / array.size
-    end
-
-    def income
-      @satisfied_demand.sum * @price
-    end
-
-    def expenses
-      (@deficit.sum * @price) + ( @deliveries_data.sum * @original_price) + @warehous_cost
     end
   end
 end
