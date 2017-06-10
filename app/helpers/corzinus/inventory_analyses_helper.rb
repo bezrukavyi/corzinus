@@ -4,7 +4,7 @@ module Corzinus
       index = 0
       profits.map do |profit|
         index += 1
-        ["Day #{index}", profit]
+        ["Day #{index}", profit.round]
       end.to_h
     end
   end

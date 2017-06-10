@@ -33,10 +33,10 @@ module Corzinus
 
     def imitate!
       (1...@data_count).each do |index|
-        @reserves[index] = calc_reserve(index).round
-        @satisfied_demand[index] = calc_satisfied_demand(index).round
-        @deficit[index] = calc_deficit(index).round
-        @deliveries_data[index] = calc_deliveries_data(index).round if index >= delivery_day
+        @reserves[index] = calc_reserve(index)
+        @satisfied_demand[index] = calc_satisfied_demand(index)
+        @deficit[index] = calc_deficit(index)
+        @deliveries_data[index] = calc_deliveries_data(index) if index >= delivery_day
       end
     end
 
