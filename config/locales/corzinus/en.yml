@@ -66,6 +66,7 @@ en:
       strategy_index: "Strategy %{id}"
       expenses: 'Expenses'
       profit: 'Profit'
+      income: 'Income'
       product: "Product %{id}"
       edit: "Edit data"
     more: More

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    corzinus (0.2)
+    corzinus (0.2.1)
       aasm
       bootstrap-sass
       cancancan

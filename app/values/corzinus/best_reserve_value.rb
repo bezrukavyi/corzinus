@@ -33,6 +33,10 @@ module Corzinus
       @all_profits ||= calculate_all_profits
     end
 
+    def all_incomes
+      @all_incomes ||= calculate_all_incomes
+    end
+
     def inventories_profit
       @inventories_profit ||= @reserves.each_with_object({}) do |reserve, reserve_profit|
         reserve_profit[reserve] = calculate_profit(reserve)
@@ -53,7 +57,13 @@ module Corzinus
 
     def calculate_all_expenses
       inventories_profit.map do |type, profit_objects|
-        [type.to_s, profit_objects.map(&:expenses).sum]
+        [type.to_s, profit_objects.map(&:expenses).sum + global_delivery_cost(profit_objects.sum(&:deliveries_data))]
+      end.to_h
+    end
+
+    def calculate_all_incomes
+      inventories_profit.map do |type, profit_objects|
+        [type.to_s, profit_objects.map(&:income).sum]
       end.to_h
     end
 

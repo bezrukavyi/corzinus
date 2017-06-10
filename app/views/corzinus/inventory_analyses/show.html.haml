@@ -9,6 +9,8 @@
         %th
           %span.in-grey-600= t('corzinus.inventory_analyses.expenses')
         %th
+          %span.in-grey-600= t('corzinus.inventory_analyses.income')
+        %th
           %span.in-grey-600= t('corzinus.inventory_analyses.profit')
 
     %tbody
@@ -22,7 +24,9 @@
         %td
           %span.in-grey-900.font-16.fw-300= @inventory_analysis.analysed_reserves.all_expenses[strategy]
         %td
-          %span.font-16.fw-300= profit
+          %span.in-grey-900.font-16.fw-300= @inventory_analysis.analysed_reserves.all_incomes[strategy]
+        %td
+          %span.in-grey-900.font-16.fw-300= profit
 
   .text-center
 
